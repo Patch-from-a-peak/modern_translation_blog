@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="http://localhost:4000/modern_translation_blog/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/modern_translation_blog/" rel="alternate" type="text/html" /><updated>2020-05-15T14:58:43+02:00</updated><id>http://localhost:4000/modern_translation_blog/feed.xml</id><title type="html">Modern Translation blog</title><subtitle>A blog focusing on the technical aspects of translation, such as scripting and software.</subtitle><entry><title type="html">OCR without ABBYY Fine Reader</title><link href="http://localhost:4000/modern_translation_blog/jekyll/update/2020/05/15/ocr-without-abbyy.html" rel="alternate" type="text/html" title="OCR without ABBYY Fine Reader" /><published>2020-05-15T12:41:25+02:00</published><updated>2020-05-15T12:41:25+02:00</updated><id>http://localhost:4000/modern_translation_blog/jekyll/update/2020/05/15/ocr-without-abbyy</id><content type="html" xml:base="http://localhost:4000/modern_translation_blog/jekyll/update/2020/05/15/ocr-without-abbyy.html">&lt;p&gt;There are many helpful applications - but some of them seem irreplaceable. The time savings they give us are so big that it is hard to imagine life without them.&lt;/p&gt;
+
+&lt;p&gt;An example of such an application is ABBYY Fine Reader, used for OCR (&lt;em&gt;Optical Character Recognition&lt;/em&gt;) - recognizing text on images and converting it to a digital form we can edit, or translate, on our computers.&lt;/p&gt;
+
+&lt;p&gt;Without OCR software, we would either have to write our translation on-the-fly, without benefitting from translation memories, or transcribe the original text and THEN translate it with our CAT software. Which would probably consume even more time.&lt;/p&gt;
+
+&lt;p&gt;So I can’t really replace OCR with manual labor. Is paying 200 $ for ABBYY’s cheapest version the only solution I have?&lt;/p&gt;
+
+&lt;p&gt;No. Luckily, some great Python scripts come to the rescue.&lt;/p&gt;
+
+&lt;h2 id=&quot;fixing-line-splits&quot;&gt;Fixing line splits&lt;/h2&gt;
+
+&lt;p&gt;One problem we might encounter&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;re&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;fix_false_line_splits&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;text&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+    
+    &lt;span class=&quot;n&quot;&gt;line_end_chars&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'([a-z,:;])'&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;line_start_chars&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'([a-z])'&lt;/span&gt;
+
+    &lt;span class=&quot;n&quot;&gt;broken_lines&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'{}&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;{}'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;format&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;line_end_chars&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;line_start_chars&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;merged_lines&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;\&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;g&amp;lt;1&amp;gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;\&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;g&amp;lt;2&amp;gt;'&lt;/span&gt;
+    
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;re&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sub&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;broken_lines&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;merged_lines&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;text&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Let’s try it out with an example:&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;example = '''
+This sentence
+should be one.
+But it was divided,
+such a shame.'''
+
+fixed = fix_false_line_splits( example )
+print(fixed)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Perfect! It merges the text nicely/&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;This sentence should be one.
+But it was divided, such a shame.
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;Learning from mistakes:&lt;/strong&gt;
+You might wonder about the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;'\g&amp;lt;1&amp;gt; \g&amp;lt;2&amp;gt;'&lt;/code&gt; line. My previous version was &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;\1 \2&lt;/code&gt;; it did merge the lines, but interpreted the characters differently than I thought and replaced both start and end characters with &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;/code&gt;. I searched for “python re sub how to refer to groups” and found the solution in &lt;a href=&quot;https://stackoverflow.com/questions/5984633/python-re-sub-group-number-after-number&quot;&gt;this SO question&lt;/a&gt;)*.&lt;/p&gt;</content><author><name></name></author><summary type="html">There are many helpful applications - but some of them seem irreplaceable. The time savings they give us are so big that it is hard to imagine life without them.</summary></entry><entry><title type="html">File formats in CAT tools 1 - a gentle introduction</title><link href="http://localhost:4000/modern_translation_blog/jekyll/update/2020/05/11/translation-formats-intro.html" rel="alternate" type="text/html" title="File formats in CAT tools 1 - a gentle introduction" /><published>2020-05-11T13:50:25+02:00</published><updated>2020-05-11T13:50:25+02:00</updated><id>http://localhost:4000/modern_translation_blog/jekyll/update/2020/05/11/translation-formats-intro</id><content type="html" xml:base="http://localhost:4000/modern_translation_blog/jekyll/update/2020/05/11/translation-formats-intro.html">&lt;p&gt;&lt;em&gt;This is a series of blog posts on file formats used by CAT (Computer-assisted translation) programs for storing translation data. Their aim is to share some knowledge which should allow us to tame our CAT tools better. Or to become independent from their whims.&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;This post discusses some basic facts related to XML and archive files. If you want to jump straight to editing them without a CAT tool, see &lt;a href=&quot;/modern_translation_blog/jekyll/update/2020/05/11/translation-formats-practice.html&quot;&gt;Part 2&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;common-formats-used-in-translation&quot;&gt;Common formats used in translation&lt;/h2&gt;
+
+&lt;p&gt;Many programs for computer-aided translation use their custom file extensions: MemoQ’s &lt;em&gt;.mqxliff&lt;/em&gt; or &lt;em&gt;.mqxlz&lt;/em&gt;, Trados’ &lt;em&gt;.sdlxliff&lt;/em&gt; and &lt;em&gt;.sdlproj&lt;/em&gt;, the interoperable &lt;em&gt;.tmx&lt;/em&gt;… This variety gives some translators the feeling that the files might be tied to the respective software and that they cannot be edited in other ways.&lt;/p&gt;
+
+&lt;p&gt;Luckily, that is not the case. Most of the time, we can access and modify the content of these files. Even without using any CAT tools. In this post, I will try to untangle some myths related to them.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; I will only focus on intermediate formats used directly by CAT tools. File formats we can import &lt;em&gt;into&lt;/em&gt; our CATs (such as &lt;em&gt;.docx&lt;/em&gt; or &lt;em&gt;.pdf&lt;/em&gt;) will only be breifly mentioned. They have their own quirks and I will discuss them in separate posts.&lt;/p&gt;
+
+&lt;p&gt;Generally, we can divide most of file formats used by translation software into two categories: &lt;strong&gt;XML files&lt;/strong&gt; and &lt;strong&gt;archives&lt;/strong&gt;. The table below contains a summary:&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt; &lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;general&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;Trados&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;MemoQ&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;strong&gt;XML file&lt;/strong&gt;&lt;br /&gt;&lt;em&gt;(Can be opened with a text editor)&lt;/em&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;.tmx&lt;br /&gt;.tbx&lt;br /&gt;.xliff&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;.sdlxliff&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;.mqxliff&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;strong&gt;Archive&lt;/strong&gt;&lt;br /&gt;&lt;em&gt;(Has to be decompressed)&lt;/em&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;.xlz&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;.sdlppx&lt;br /&gt;.sdlrpx&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;.mqxlz&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;Now, let’s discuss the two basic types in more detail.&lt;/p&gt;
+
+&lt;h1 id=&quot;xml-files&quot;&gt;XML files&lt;/h1&gt;
+
+&lt;p&gt;XML (eXtensible Markup Language) is an incredibly widespread format for storing data and the basis of countless applications:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Configuration data of Android apps? XML.&lt;/li&gt;
+  &lt;li&gt;Format for financial statements? XBRL, based on XML.&lt;/li&gt;
+  &lt;li&gt;Vector graphics? SVG, based on XML.&lt;/li&gt;
+  &lt;li&gt;Geolocation data? Often XML.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Many things in the world were built atop some tailored XML 😀 It has also become the most popular intermediate format for translation files.&lt;/p&gt;
+
+&lt;p&gt;As translators, we might be using a few kinds of XML-based formats or their derivatives: &lt;em&gt;.xliff&lt;/em&gt; (for storing source-target pairs), &lt;em&gt;.tmx&lt;/em&gt; (for translation memories) or &lt;em&gt;.tbx&lt;/em&gt; (for glossaries).&lt;/p&gt;
+
+&lt;p&gt;Here is an example of an XLIFF file structure (&lt;em&gt;.mqxliff&lt;/em&gt; from MemoQ and &lt;em&gt;.sdlxliff&lt;/em&gt; from Trados are based on it):&lt;/p&gt;
+
+&lt;div class=&quot;language-xml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;xliff&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;xmlns=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;urn:oasis:names:tc:xliff:document:2.0&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;version=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;2.0&quot;&lt;/span&gt;
+ &lt;span class=&quot;na&quot;&gt;srcLang=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;en-US&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;trgLang=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;ja-JP&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+
+ &lt;span class=&quot;nt&quot;&gt;&amp;lt;file&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;f1&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;original=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Graphic Example.psd&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;skeleton&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;href=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Graphic Example.psd.skl&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+
+  &lt;span class=&quot;c&quot;&gt;&amp;lt;!--The first translation unit, containing source and target text...--&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;unit&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;1&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+   &lt;span class=&quot;nt&quot;&gt;&amp;lt;segment&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;source&amp;gt;&lt;/span&gt;XLIFF Data Manager&lt;span class=&quot;nt&quot;&gt;&amp;lt;/source&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;target&amp;gt;&lt;/span&gt;XLIFF データ・マネージャ&lt;span class=&quot;nt&quot;&gt;&amp;lt;/target&amp;gt;&lt;/span&gt;
+   &lt;span class=&quot;nt&quot;&gt;&amp;lt;/segment&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;/unit&amp;gt;&lt;/span&gt;
+
+  &lt;span class=&quot;c&quot;&gt;&amp;lt;!--Potentially more units...--&amp;gt;&lt;/span&gt;
+
+ &lt;span class=&quot;nt&quot;&gt;&amp;lt;/file&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/xliff&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;&lt;em&gt;(Example adopted from &lt;a href=&quot;https://en.wikipedia.org/wiki/XLIFF&quot;&gt;the Wikipedia entry on XLIFF&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;p&gt;Some XML basics:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;The most notable part of XML structure are &lt;strong&gt;tags&lt;/strong&gt;. We can distinguish between start (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;...&amp;gt;&lt;/code&gt;) and end (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;/...&amp;gt;&lt;/code&gt;) tags.&lt;/li&gt;
+  &lt;li&gt;The first string of characters within the brackets (before whitespace) is the &lt;strong&gt;name&lt;/strong&gt; of the tag.&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;A pair of same-name tags and everything between them (text, other tags etc.) is called an &lt;strong&gt;element&lt;/strong&gt;. It’s the basic building block of XML. Elements can be nested in each other.&lt;/p&gt;
+
+    &lt;p&gt;Let’s look at the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;segment&lt;/code&gt; element (lines 9-12). Its start tag is &lt;em&gt;&amp;lt;segment&amp;gt;&lt;/em&gt; and the end tag is &lt;em&gt;&amp;lt;/segment&amp;gt;&lt;/em&gt;). It is contained in the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;unit&lt;/code&gt; element. It also contains two child elements: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;source&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;target&lt;/code&gt;.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Apart from the obligatory name, each element may contain &lt;strong&gt;attributes&lt;/strong&gt;, which have some specific &lt;strong&gt;values&lt;/strong&gt;.&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;The attributes may only be specified in the start tag. The end tag can &lt;em&gt;only&lt;/em&gt; contain the name.&lt;/p&gt;
+
+    &lt;p&gt;In this case, the attributes of the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;file&lt;/code&gt; element (line 4) are &lt;em&gt;id&lt;/em&gt; and &lt;em&gt;original&lt;/em&gt;. The value of the &lt;em&gt;id&lt;/em&gt; attribute is &lt;em&gt;&quot;f1&quot;&lt;/em&gt;. The value of the &lt;em&gt;original&lt;/em&gt; attribute is &lt;em&gt;&quot;Graphic Example.psd&quot;&lt;/em&gt;.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Tag pairs without other content between them can also be written as a single tag, with a forward slash at the end.&lt;/p&gt;
+
+    &lt;p&gt;In our case, it’s the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;skeleton (...) /&amp;gt;&lt;/code&gt; tag from line 5. It could have also been written as &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;skeleton (...)&amp;gt;&amp;lt;/skeleton&amp;gt;&lt;/code&gt;.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Space between elements does not matter that much. The example was indented (&lt;em&gt;prettified&lt;/em&gt;) for clarity, but the tags could have also been put in one line, one right after the other.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;What is most interesting to us, as translators, are the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;source&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;target&lt;/code&gt; elements. They occur in different translation formats. The first type contains the original text, and the second one contains our translation.&lt;/p&gt;
+
+&lt;p&gt;  
+ &lt;/p&gt;
+
+&lt;h1 id=&quot;archives&quot;&gt;Archives&lt;/h1&gt;
+
+&lt;p&gt;Archives are basically compressed folders which can contain multiple files. They might have various extensions, but in many cases &lt;strong&gt;they are the popular .zip format under the hood&lt;/strong&gt;. Some files which, quite surprisingly, are actually archives:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;popular formats used by Microsoft Word (&lt;em&gt;.docx&lt;/em&gt;), Excel (&lt;em&gt;.xlsx&lt;/em&gt;) and PowerPoint (&lt;em&gt;.pptx&lt;/em&gt;),&lt;/li&gt;
+  &lt;li&gt;their LibreOffice equivalents (&lt;em&gt;.odt&lt;/em&gt;, &lt;em&gt;.odf&lt;/em&gt; and &lt;em&gt;.odp&lt;/em&gt;),&lt;/li&gt;
+  &lt;li&gt;applications for Android phones (&lt;em&gt;.apk&lt;/em&gt;),&lt;/li&gt;
+  &lt;li&gt;and, of course, translation packages (&lt;em&gt;.xlz&lt;/em&gt;, &lt;em&gt;.mqxlz&lt;/em&gt;, &lt;em&gt;.sdlppx&lt;/em&gt;…).&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Unlike XML files, archives can’t simply be viewed in your text editor. They contain compressed streams of data, which the text editor would try to directly convert into characters. The result is gibberish:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/modern_translation_blog/assets/blogpost1/archive_mangled_in_notepad.jpg&quot; /&gt;
+&lt;em&gt;(This is what happens if you try to open an archive in Notepad)&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;You can see that most of the text is mangled and unreadable. File names within the archive are the only legible thing. My archive contained a single file, &lt;em&gt;example_file.txt&lt;/em&gt;, and it is shown here, in the middle of line 2.&lt;/p&gt;
+
+&lt;p&gt;Sometimes, when browsing files in Windows Explorer or other file explorers, you can click on a &lt;em&gt;.zip&lt;/em&gt; file and see its contents as if it were a normal folder. It is because &lt;strong&gt;your operating system simply hides the complexity from you and unpacks the archive behind the scenes&lt;/strong&gt; (both Linux Mint and Windows 10 do it, from my experience). If you tried to actually open and edit the files contained in the archive, you could encounter trouble, such as broken references between documents.&lt;/p&gt;
+
+&lt;p&gt;If you want to actually modify the files within an archive, you should decompress it first, work on the individual files, and then re-compress the bundle again. This is also what your CAT tools do behind the scenes every time they open a package - there is no magic here.&lt;/p&gt;
+
+&lt;p&gt;In practice, archive files used by translators usually contain a bunch of XML files: bilingual files for translation, structure of the source file (or the file itself), translation memories, glossaries etc. They might also contain some other reference files.&lt;/p&gt;
+
+&lt;h1 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h1&gt;
+
+&lt;p&gt;Although the variety of file formats may seem daunting at first, we can see they they can actually be divided into a very small number of categories and are subject to a set of universal rules. Here are some rules of thumbs which can make it easier to navigate the landscape of files:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Files are just blocks of bytes&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;p&gt;In practice, this means that two exactly identical files, opened by the same reliable software, will &lt;strong&gt;always&lt;/strong&gt; appear exactly the same. Sure, editing a file manually might be more tedious and error-prone, but there is no magic in CAT tools which would force you to use them.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Files of the same type can be processed in the same way&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;p&gt;&lt;em&gt;If it walks like a duck and it quacks like a duck, then it must be a duck&lt;/em&gt;.&lt;br /&gt;
+The data from all valid XML files can be extracted with an XML parser. Sure, the tag names and hierarchy might be different, but the general way of processing these files is universal. In the same manner, all zip archives can be unpacked and repacked in the same way.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;File extensions can be just a hint&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;p&gt;Some programs use their own file extensions to differentiate themselves, get some custom icons or treatment from the operating system etc. But if they are actually &lt;em&gt;.zip&lt;/em&gt; archives, then they can be extracted like &lt;em&gt;.zip&lt;/em&gt; archives. If they are valid XML, then they can be parsed as XML. Then point 2 applies.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;There are exceptions to all rules&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;p&gt;Notice how I write &lt;em&gt;reliable software&lt;/em&gt; or &lt;em&gt;valid XML&lt;/em&gt;? Although the rules are universal, it is always possible to encounter something which deviates from them or is simply buggy. Don’t let this discourage you from freely experimenting with file manipulation… but maybe don’t experiment right before a deadline ;) Having a plan B always helps.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;I hope this clarifies things a bit and gives you some confidence. CAT tool formats really are more accessible than they seem. Let’s &lt;a href=&quot;/modern_translation_blog/jekyll/update/2020/05/11/translation-formats-practice.html&quot;&gt;apply our knowledge in real-life situations&lt;/a&gt;!&lt;/p&gt;
+
+&lt;h1 id=&quot;other-resources&quot;&gt;Other resources&lt;/h1&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.w3schools.com/xml/&quot;&gt;XML tutorial from W3C&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.zaac.de/pdf/2015_TLC_Warsaw_Zerfass_DataTransfer_with_tmx_tbx_and_xliff.pdf&quot;&gt;A presentation by Angelika Zerfass discussing &lt;em&gt;.tmx&lt;/em&gt;, &lt;em&gt;.tbx&lt;/em&gt; and &lt;em&gt;.xliff&lt;/em&gt;&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/List_of_archive_formats#Comparison&quot;&gt;Wikipedia’s comparison of various archive formats&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content><author><name></name></author><summary type="html">This is a series of blog posts on file formats used by CAT (Computer-assisted translation) programs for storing translation data. Their aim is to share some knowledge which should allow us to tame our CAT tools better. Or to become independent from their whims.</summary></entry><entry><title type="html">File formats in CAT tools 2 - direct editing</title><link href="http://localhost:4000/modern_translation_blog/jekyll/update/2020/05/11/translation-formats-practice.html" rel="alternate" type="text/html" title="File formats in CAT tools 2 - direct editing" /><published>2020-05-11T13:50:25+02:00</published><updated>2020-05-11T13:50:25+02:00</updated><id>http://localhost:4000/modern_translation_blog/jekyll/update/2020/05/11/translation-formats-practice</id><content type="html" xml:base="http://localhost:4000/modern_translation_blog/jekyll/update/2020/05/11/translation-formats-practice.html">&lt;p&gt;&lt;strong&gt;Warning:&lt;/strong&gt; Blog post under construction, still need to add content.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;This is a series of blog posts on file formats used by CAT (Computer-assisted translation) programs for storing translation data. Their aim is to share some knowledge which should allow us to tame our CAT tools better. Or to become independent from their whims.&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;This post discusses ways of editing file types often used by translators - XML files and archives - without actually using a CAT tool. If you want to learn about these files first see &lt;a href=&quot;/modern_translation_blog/jekyll/update/2020/05/11/translation-formats-intro.html&quot;&gt;Part 1&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;prerequisites&quot;&gt;Prerequisites&lt;/h2&gt;
+
+&lt;p&gt;In order to tinker with translation files, you will need a few programs:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;A &lt;strong&gt;text editor&lt;/strong&gt; for opening files (on Windows, you can use the default Notepad or the free &lt;a href=&quot;https://notepad-plus-plus.org/&quot;&gt;Notepad++&lt;/a&gt;)&lt;/li&gt;
+  &lt;li&gt;A program for &lt;strong&gt;opening zip archives&lt;/strong&gt; (on Windows, you can use the free &lt;a href=&quot;https://www.7-zip.org/download.html&quot;&gt;7Zip&lt;/a&gt;)&lt;/li&gt;
+  &lt;li&gt;A &lt;strong&gt;CAT tool&lt;/strong&gt; of your choice (e.g. the free &lt;a href=&quot;https://omegat.org/download&quot;&gt;OmegaT&lt;/a&gt;)&lt;/li&gt;
+&lt;/ul&gt;</content><author><name></name></author><summary type="html">Warning: Blog post under construction, still need to add content.</summary></entry></feed>

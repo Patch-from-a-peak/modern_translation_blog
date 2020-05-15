@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>File formats in CAT tools 1 - a gentle introduction | Modern Translation blog</title>
+<meta name="generator" content="Jekyll v3.8.5" />
+<meta property="og:title" content="File formats in CAT tools 1 - a gentle introduction" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="This is a series of blog posts on file formats used by CAT (Computer-assisted translation) programs for storing translation data. Their aim is to share some knowledge which should allow us to tame our CAT tools better. Or to become independent from their whims." />
+<meta property="og:description" content="This is a series of blog posts on file formats used by CAT (Computer-assisted translation) programs for storing translation data. Their aim is to share some knowledge which should allow us to tame our CAT tools better. Or to become independent from their whims." />
+<link rel="canonical" href="http://localhost:4000/modern_translation_blog/jekyll/update/2020/05/11/translation-formats-intro.html" />
+<meta property="og:url" content="http://localhost:4000/modern_translation_blog/jekyll/update/2020/05/11/translation-formats-intro.html" />
+<meta property="og:site_name" content="Modern Translation blog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-05-11T13:50:25+02:00" />
+<script type="application/ld+json">
+{"@type":"BlogPosting","headline":"File formats in CAT tools 1 - a gentle introduction","dateModified":"2020-05-11T13:50:25+02:00","datePublished":"2020-05-11T13:50:25+02:00","url":"http://localhost:4000/modern_translation_blog/jekyll/update/2020/05/11/translation-formats-intro.html","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/modern_translation_blog/jekyll/update/2020/05/11/translation-formats-intro.html"},"description":"This is a series of blog posts on file formats used by CAT (Computer-assisted translation) programs for storing translation data. Their aim is to share some knowledge which should allow us to tame our CAT tools better. Or to become independent from their whims.","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/modern_translation_blog/assets/main.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/modern_translation_blog/feed.xml" title="Modern Translation blog" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/modern_translation_blog/">Modern Translation blog</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/modern_translation_blog/about/">About</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">File formats in CAT tools 1 - a gentle introduction</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2020-05-11T13:50:25+02:00" itemprop="datePublished">May 11, 2020
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p><em>This is a series of blog posts on file formats used by CAT (Computer-assisted translation) programs for storing translation data. Their aim is to share some knowledge which should allow us to tame our CAT tools better. Or to become independent from their whims.</em></p>
+
+<p><em>This post discusses some basic facts related to XML and archive files. If you want to jump straight to editing them without a CAT tool, see <a href="/modern_translation_blog/jekyll/update/2020/05/11/translation-formats-practice.html">Part 2</a>.</em></p>
+
+<h2 id="common-formats-used-in-translation">Common formats used in translation</h2>
+
+<p>Many programs for computer-aided translation use their custom file extensions: MemoQ’s <em>.mqxliff</em> or <em>.mqxlz</em>, Trados’ <em>.sdlxliff</em> and <em>.sdlproj</em>, the interoperable <em>.tmx</em>… This variety gives some translators the feeling that the files might be tied to the respective software and that they cannot be edited in other ways.</p>
+
+<p>Luckily, that is not the case. Most of the time, we can access and modify the content of these files. Even without using any CAT tools. In this post, I will try to untangle some myths related to them.</p>
+
+<p><strong>Note:</strong> I will only focus on intermediate formats used directly by CAT tools. File formats we can import <em>into</em> our CATs (such as <em>.docx</em> or <em>.pdf</em>) will only be breifly mentioned. They have their own quirks and I will discuss them in separate posts.</p>
+
+<p>Generally, we can divide most of file formats used by translation software into two categories: <strong>XML files</strong> and <strong>archives</strong>. The table below contains a summary:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th> </th>
+      <th style="text-align: center">general</th>
+      <th style="text-align: center">Trados</th>
+      <th style="text-align: center">MemoQ</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>XML file</strong><br /><em>(Can be opened with a text editor)</em></td>
+      <td style="text-align: center">.tmx<br />.tbx<br />.xliff</td>
+      <td style="text-align: center">.sdlxliff</td>
+      <td style="text-align: center">.mqxliff</td>
+    </tr>
+    <tr>
+      <td><strong>Archive</strong><br /><em>(Has to be decompressed)</em></td>
+      <td style="text-align: center">.xlz</td>
+      <td style="text-align: center">.sdlppx<br />.sdlrpx</td>
+      <td style="text-align: center">.mqxlz</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Now, let’s discuss the two basic types in more detail.</p>
+
+<h1 id="xml-files">XML files</h1>
+
+<p>XML (eXtensible Markup Language) is an incredibly widespread format for storing data and the basis of countless applications:</p>
+
+<ul>
+  <li>Configuration data of Android apps? XML.</li>
+  <li>Format for financial statements? XBRL, based on XML.</li>
+  <li>Vector graphics? SVG, based on XML.</li>
+  <li>Geolocation data? Often XML.</li>
+</ul>
+
+<p>Many things in the world were built atop some tailored XML 😀 It has also become the most popular intermediate format for translation files.</p>
+
+<p>As translators, we might be using a few kinds of XML-based formats or their derivatives: <em>.xliff</em> (for storing source-target pairs), <em>.tmx</em> (for translation memories) or <em>.tbx</em> (for glossaries).</p>
+
+<p>Here is an example of an XLIFF file structure (<em>.mqxliff</em> from MemoQ and <em>.sdlxliff</em> from Trados are based on it):</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;xliff</span> <span class="na">xmlns=</span><span class="s">"urn:oasis:names:tc:xliff:document:2.0"</span> <span class="na">version=</span><span class="s">"2.0"</span>
+ <span class="na">srcLang=</span><span class="s">"en-US"</span> <span class="na">trgLang=</span><span class="s">"ja-JP"</span><span class="nt">&gt;</span>
+
+ <span class="nt">&lt;file</span> <span class="na">id=</span><span class="s">"f1"</span> <span class="na">original=</span><span class="s">"Graphic Example.psd"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;skeleton</span> <span class="na">href=</span><span class="s">"Graphic Example.psd.skl"</span><span class="nt">/&gt;</span>
+
+  <span class="c">&lt;!--The first translation unit, containing source and target text...--&gt;</span>
+  <span class="nt">&lt;unit</span> <span class="na">id=</span><span class="s">"1"</span><span class="nt">&gt;</span>
+   <span class="nt">&lt;segment&gt;</span>
+    <span class="nt">&lt;source&gt;</span>XLIFF Data Manager<span class="nt">&lt;/source&gt;</span>
+    <span class="nt">&lt;target&gt;</span>XLIFF データ・マネージャ<span class="nt">&lt;/target&gt;</span>
+   <span class="nt">&lt;/segment&gt;</span>
+  <span class="nt">&lt;/unit&gt;</span>
+
+  <span class="c">&lt;!--Potentially more units...--&gt;</span>
+
+ <span class="nt">&lt;/file&gt;</span>
+<span class="nt">&lt;/xliff&gt;</span>
+</code></pre></div></div>
+<p><em>(Example adopted from <a href="https://en.wikipedia.org/wiki/XLIFF">the Wikipedia entry on XLIFF</a>)</em></p>
+
+<p> </p>
+
+<p>Some XML basics:</p>
+
+<ul>
+  <li>The most notable part of XML structure are <strong>tags</strong>. We can distinguish between start (<code class="language-plaintext highlighter-rouge">&lt;...&gt;</code>) and end (<code class="language-plaintext highlighter-rouge">&lt;/...&gt;</code>) tags.</li>
+  <li>The first string of characters within the brackets (before whitespace) is the <strong>name</strong> of the tag.</li>
+  <li>
+    <p>A pair of same-name tags and everything between them (text, other tags etc.) is called an <strong>element</strong>. It’s the basic building block of XML. Elements can be nested in each other.</p>
+
+    <p>Let’s look at the <code class="language-plaintext highlighter-rouge">segment</code> element (lines 9-12). Its start tag is <em>&lt;segment&gt;</em> and the end tag is <em>&lt;/segment&gt;</em>). It is contained in the <code class="language-plaintext highlighter-rouge">unit</code> element. It also contains two child elements: <code class="language-plaintext highlighter-rouge">source</code> and <code class="language-plaintext highlighter-rouge">target</code>.</p>
+  </li>
+  <li>Apart from the obligatory name, each element may contain <strong>attributes</strong>, which have some specific <strong>values</strong>.</li>
+  <li>
+    <p>The attributes may only be specified in the start tag. The end tag can <em>only</em> contain the name.</p>
+
+    <p>In this case, the attributes of the <code class="language-plaintext highlighter-rouge">file</code> element (line 4) are <em>id</em> and <em>original</em>. The value of the <em>id</em> attribute is <em>"f1"</em>. The value of the <em>original</em> attribute is <em>"Graphic Example.psd"</em>.</p>
+  </li>
+  <li>
+    <p>Tag pairs without other content between them can also be written as a single tag, with a forward slash at the end.</p>
+
+    <p>In our case, it’s the <code class="language-plaintext highlighter-rouge">&lt;skeleton (...) /&gt;</code> tag from line 5. It could have also been written as <code class="language-plaintext highlighter-rouge">&lt;skeleton (...)&gt;&lt;/skeleton&gt;</code>.</p>
+  </li>
+  <li>Space between elements does not matter that much. The example was indented (<em>prettified</em>) for clarity, but the tags could have also been put in one line, one right after the other.</li>
+</ul>
+
+<p>What is most interesting to us, as translators, are the <code class="language-plaintext highlighter-rouge">source</code> and <code class="language-plaintext highlighter-rouge">target</code> elements. They occur in different translation formats. The first type contains the original text, and the second one contains our translation.</p>
+
+<p>  
+ </p>
+
+<h1 id="archives">Archives</h1>
+
+<p>Archives are basically compressed folders which can contain multiple files. They might have various extensions, but in many cases <strong>they are the popular .zip format under the hood</strong>. Some files which, quite surprisingly, are actually archives:</p>
+
+<ul>
+  <li>popular formats used by Microsoft Word (<em>.docx</em>), Excel (<em>.xlsx</em>) and PowerPoint (<em>.pptx</em>),</li>
+  <li>their LibreOffice equivalents (<em>.odt</em>, <em>.odf</em> and <em>.odp</em>),</li>
+  <li>applications for Android phones (<em>.apk</em>),</li>
+  <li>and, of course, translation packages (<em>.xlz</em>, <em>.mqxlz</em>, <em>.sdlppx</em>…).</li>
+</ul>
+
+<p>Unlike XML files, archives can’t simply be viewed in your text editor. They contain compressed streams of data, which the text editor would try to directly convert into characters. The result is gibberish:</p>
+
+<p><img src="/modern_translation_blog/assets/blogpost1/archive_mangled_in_notepad.jpg" />
+<em>(This is what happens if you try to open an archive in Notepad)</em></p>
+
+<p>You can see that most of the text is mangled and unreadable. File names within the archive are the only legible thing. My archive contained a single file, <em>example_file.txt</em>, and it is shown here, in the middle of line 2.</p>
+
+<p>Sometimes, when browsing files in Windows Explorer or other file explorers, you can click on a <em>.zip</em> file and see its contents as if it were a normal folder. It is because <strong>your operating system simply hides the complexity from you and unpacks the archive behind the scenes</strong> (both Linux Mint and Windows 10 do it, from my experience). If you tried to actually open and edit the files contained in the archive, you could encounter trouble, such as broken references between documents.</p>
+
+<p>If you want to actually modify the files within an archive, you should decompress it first, work on the individual files, and then re-compress the bundle again. This is also what your CAT tools do behind the scenes every time they open a package - there is no magic here.</p>
+
+<p>In practice, archive files used by translators usually contain a bunch of XML files: bilingual files for translation, structure of the source file (or the file itself), translation memories, glossaries etc. They might also contain some other reference files.</p>
+
+<h1 id="conclusion">Conclusion</h1>
+
+<p>Although the variety of file formats may seem daunting at first, we can see they they can actually be divided into a very small number of categories and are subject to a set of universal rules. Here are some rules of thumbs which can make it easier to navigate the landscape of files:</p>
+
+<ol>
+  <li>
+    <p><strong>Files are just blocks of bytes</strong></p>
+
+    <p>In practice, this means that two exactly identical files, opened by the same reliable software, will <strong>always</strong> appear exactly the same. Sure, editing a file manually might be more tedious and error-prone, but there is no magic in CAT tools which would force you to use them.</p>
+  </li>
+  <li>
+    <p><strong>Files of the same type can be processed in the same way</strong></p>
+
+    <p><em>If it walks like a duck and it quacks like a duck, then it must be a duck</em>.<br />
+The data from all valid XML files can be extracted with an XML parser. Sure, the tag names and hierarchy might be different, but the general way of processing these files is universal. In the same manner, all zip archives can be unpacked and repacked in the same way.</p>
+  </li>
+  <li>
+    <p><strong>File extensions can be just a hint</strong></p>
+
+    <p>Some programs use their own file extensions to differentiate themselves, get some custom icons or treatment from the operating system etc. But if they are actually <em>.zip</em> archives, then they can be extracted like <em>.zip</em> archives. If they are valid XML, then they can be parsed as XML. Then point 2 applies.</p>
+  </li>
+  <li>
+    <p><strong>There are exceptions to all rules</strong></p>
+
+    <p>Notice how I write <em>reliable software</em> or <em>valid XML</em>? Although the rules are universal, it is always possible to encounter something which deviates from them or is simply buggy. Don’t let this discourage you from freely experimenting with file manipulation… but maybe don’t experiment right before a deadline ;) Having a plan B always helps.</p>
+  </li>
+</ol>
+
+<p>I hope this clarifies things a bit and gives you some confidence. CAT tool formats really are more accessible than they seem. Let’s <a href="/modern_translation_blog/jekyll/update/2020/05/11/translation-formats-practice.html">apply our knowledge in real-life situations</a>!</p>
+
+<h1 id="other-resources">Other resources</h1>
+
+<ul>
+  <li><a href="https://www.w3schools.com/xml/">XML tutorial from W3C</a></li>
+  <li><a href="https://www.zaac.de/pdf/2015_TLC_Warsaw_Zerfass_DataTransfer_with_tmx_tbx_and_xliff.pdf">A presentation by Angelika Zerfass discussing <em>.tmx</em>, <em>.tbx</em> and <em>.xliff</em></a></li>
+  <li><a href="https://en.wikipedia.org/wiki/List_of_archive_formats#Comparison">Wikipedia’s comparison of various archive formats</a></li>
+</ul>
+
+  </div><a class="u-url" href="/modern_translation_blog/jekyll/update/2020/05/11/translation-formats-intro.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/modern_translation_blog/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Modern Translation blog</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Modern Translation blog</li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>A blog focusing on the technical aspects of translation, such as scripting and software.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

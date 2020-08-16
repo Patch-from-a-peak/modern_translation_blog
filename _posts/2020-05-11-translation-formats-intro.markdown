@@ -7,7 +7,7 @@ categories: intro files XML
 
 *This is a series of blog posts on file formats used by CAT (Computer-assisted translation) programs for storing translation data. Their aim is to share some knowledge which should allow us to tame our CAT tools better. Or to become independent from their whims.*
 
-*This post discusses some basic facts related to XML and archive files. If you want to jump straight to editing them without a CAT tool, see [Part 2]({{ site.baseurl }}{% link _posts/2020-05-14-translation-formats-practice.markdown %}).*
+*This post discusses some basic facts related to XML and archive files. If you want to jump straight to editing them without a CAT tool, see [Part 2]({{ site.baseurl }}{% link _posts/2020-08-16-translation-formats-practice.markdown %}).*
 
 ## Common formats used in translation
 
@@ -153,7 +153,7 @@ Some programs use custom file extensions to get distinct icons and treatment. Bu
 
    Notice how I write *reliable software* or *valid XML*? Although the rules are universal, it's always possible to encounter something atypical or plain buggy. Don't let this discourage you from experimenting with file manipulation... but maybe don't do it right before a deadline! 😀 Having a plan B always helps. 
 
-I hope this clarifies things a bit and gives you some confidence. CAT tool formats really are more accessible than they seem. Let's [apply our knowledge in real-life situations]({{ site.baseurl }}{% link _posts/2020-05-14-translation-formats-practice.markdown %})!
+I hope this clarifies things a bit and gives you some confidence. CAT tool formats really are more accessible than they seem. Let's [apply our knowledge in real-life situations]({{ site.baseurl }}{% link _posts/2020-08-16-translation-formats-practice.markdown %})!
 
 ## Other resources
 

@@ -11,7 +11,9 @@ h1, h2, h3, h4, h5, h6, p, blockquote, pre, ul, ol, dl, figure, .highlight { mar
 main { display: block; /* Default value of `display` of `main` element is 'inline' in IE 11. */ }
 
 /** Images */
-img { max-width: 100%; vertical-align: middle; }
+img { display: block; max-width: 100%; vertical-align: middle; box-shadow: 0 1px 10px lightgray; margin: 50px auto; }
+
+.inline { margin-top: 0px; margin-bottom: 0px; }
 
 /** Figures */
 figure > img { display: block; }
@@ -34,7 +36,7 @@ a:hover { color: #111; text-decoration: underline; }
 .social-media-list a:hover .username { text-decoration: underline; }
 
 /** Blockquotes */
-blockquote { color: #828282; border-left: 4px solid #e8e8e8; padding-left: 15px; font-size: 18px; letter-spacing: -1px; font-style: italic; }
+blockquote { color: #828282; border-left: 4px solid #640d9b; padding-left: 15px; font-size: 18px; letter-spacing: -1px; /* font-style: italic; */ }
 blockquote > :last-child { margin-bottom: 0; }
 
 /** Code formatting */
@@ -63,6 +65,12 @@ table tr:nth-child(even) { background-color: #f7f7f7; }
 table th, table td { padding: 10px 15px; }
 table th { background-color: #f0f0f0; border: 1px solid #dedede; border-bottom-color: #c9c9c9; }
 table td { border: 1px solid #e8e8e8; }
+
+.info { background-color: #dfd; padding: 10px; font-style: italic; }
+
+.kbd { display: inline-block; margin: 0 .1em; padding: 0 .5em; color: black; background-color: #f0f0f0; border: 1px solid #aaaaaa; border-radius: 3px; box-shadow: 0 1px 1px lightgray; white-space: nowrap; }
+
+.pyprint { color: blue; padding: .5em; background_color: white; box-shadow: 0 1px 10px lightgray; font-family: "Lucida Console", Monaco, monospace; }
 
 /** Site header */
 .site-header { border-top: 5px solid #424242; border-bottom: 1px solid #e8e8e8; min-height: 55.95px; position: relative; }

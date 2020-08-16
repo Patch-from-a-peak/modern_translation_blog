@@ -1,6 +1,216 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="http://localhost:4000/modern_translation_blog/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/modern_translation_blog/" rel="alternate" type="text/html" /><updated>2020-05-16T14:05:09+02:00</updated><id>http://localhost:4000/modern_translation_blog/feed.xml</id><title type="html">Modern Translation blog</title><subtitle>A blog focusing on the technical aspects of translation, such as scripting and software.</subtitle><entry><title type="html">File formats in CAT tools 1 - a gentle introduction</title><link href="http://localhost:4000/modern_translation_blog/jekyll/update/2020/05/11/translation-formats-intro.html" rel="alternate" type="text/html" title="File formats in CAT tools 1 - a gentle introduction" /><published>2020-05-11T13:50:25+02:00</published><updated>2020-05-11T13:50:25+02:00</updated><id>http://localhost:4000/modern_translation_blog/jekyll/update/2020/05/11/translation-formats-intro</id><content type="html" xml:base="http://localhost:4000/modern_translation_blog/jekyll/update/2020/05/11/translation-formats-intro.html">&lt;p&gt;&lt;em&gt;This is a series of blog posts on file formats used by CAT (Computer-assisted translation) programs for storing translation data. Their aim is to share some knowledge which should allow us to tame our CAT tools better. Or to become independent from their whims.&lt;/em&gt;&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="http://localhost:4000/modern_translation_blog/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/modern_translation_blog/" rel="alternate" type="text/html" /><updated>2020-08-16T21:08:37+02:00</updated><id>http://localhost:4000/modern_translation_blog/feed.xml</id><title type="html">Modern Translation blog</title><subtitle>A blog focusing on the technical aspects of translation, such as scripting and software.</subtitle><entry><title type="html">File formats in CAT tools 2 – direct editing</title><link href="http://localhost:4000/modern_translation_blog/jekyll/update/2020/08/16/translation-formats-practice.html" rel="alternate" type="text/html" title="File formats in CAT tools 2 – direct editing" /><published>2020-08-16T13:50:25+02:00</published><updated>2020-08-16T13:50:25+02:00</updated><id>http://localhost:4000/modern_translation_blog/jekyll/update/2020/08/16/translation-formats-practice</id><content type="html" xml:base="http://localhost:4000/modern_translation_blog/jekyll/update/2020/08/16/translation-formats-practice.html">&lt;p&gt;&lt;em&gt;This is a series of blog posts on file formats used by CAT (Computer-assisted translation) programs for storing translation data. Their aim is to share some knowledge which should allow us to tame our CAT tools better. Or to become independent from their whims.&lt;/em&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;em&gt;This post discusses some basic facts related to XML and archive files. If you want to jump straight to editing them without a CAT tool, see &lt;a href=&quot;/modern_translation_blog/jekyll/update/2020/05/11/translation-formats-practice.html&quot;&gt;Part 2&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;This post discusses ways of editing file types often used by translators – XML files and archives – without actually using a CAT tool. If you want to learn about these filetypes first, see &lt;a href=&quot;/modern_translation_blog/intro/files/xml/2020/05/11/translation-formats-intro.html&quot;&gt;Part 1&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;introduction&quot;&gt;Introduction&lt;/h2&gt;
+
+&lt;p&gt;In a perfect world, things are simple: you get a file (&lt;em&gt;translation package&lt;/em&gt;) for translation, you open it with a specified CAT tool. It opens easily, you translate it and send it back.&lt;/p&gt;
+
+&lt;p&gt;However, there are many reasons you may want to stray from the path and work with the files on your own terms. Some examples:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;You want to use your preferred CAT tool, but it does not directly support the format of the translation package.&lt;/p&gt;
+
+    &lt;p&gt;(&lt;a href=&quot;https://www.proz.com/forum/sdl_trados_support/211489-how_to_work_on_a_xlz_file.html&quot;&gt;Example 1&lt;/a&gt;, &lt;a href=&quot;https://www.proz.com/forum/sdl_trados_support/344630-using_lionbridge_files_in_trados_2015_ok_reverting_back_lionbridge_says_not_ok.html&quot;&gt;example 2&lt;/a&gt;, &lt;a href=&quot;https://community.sdl.com/product-groups/translationproductivity/f/studio/6040/working-with-xyleme-xlz-packages&quot;&gt;example 3&lt;/a&gt; and perhaps many others…)&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;You don’t need the full content of translation packages and only want to get specific files (e.g. glossaries) out of them.&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;You want to change the status of some segments before loading them into your CAT tool.&lt;/p&gt;
+
+    &lt;p&gt;E.g. they might have been accidentally locked, so you can’t edit them, but you have to… Oh, and you don’t have time to wait for the agency to send a new version!&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;After you finish your work, you are asked for some light find-and-replace corrections.&lt;/p&gt;
+
+    &lt;p&gt;But you are still traumatised by the CAT tool you were forced to use, and you don’t want to see it ever again…&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Countless other reasons!&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;No matter what reason you may have, &lt;strong&gt;you should be free to work with files in the way which is most comfortable to you&lt;/strong&gt;. If CAT tools make you face obstacles, you can bend them to your will.&lt;/p&gt;
+
+&lt;h1 id=&quot;prerequisites&quot;&gt;Prerequisites&lt;/h1&gt;
+
+&lt;p&gt;In order to play with translation files, you only need a few programs bundled with Windows by default:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;File Explorer&lt;/strong&gt; (installed by default on all Windows versions; however, the one I use is bundled with Windows 10 and I don’t know if older ones support zip files);&lt;/li&gt;
+  &lt;li&gt;a &lt;strong&gt;text editor&lt;/strong&gt; for opening files (on Windows, you can use the default Notepad or the free &lt;a href=&quot;https://notepad-plus-plus.org/&quot;&gt;Notepad++&lt;/a&gt;; larger office suites, such as LibreOffice or Microsoft Word, are also OK);&lt;/li&gt;
+  &lt;li&gt;(optional, but helpful) any &lt;strong&gt;web browser&lt;/strong&gt;: Firefox, Brave, Edge, maybe even Chrome.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;If you want, you can also use a CAT tool compatible with the translation package format to check if the edited package opens correctly.&lt;/p&gt;
+
+&lt;p&gt;If you want to follow my example, find and download &lt;strong&gt;Idiom WorldServer&lt;/strong&gt; and then get the &lt;em&gt;.xlz&lt;/em&gt; package it uses for its tutorial.&lt;br /&gt;
+&lt;strong&gt;Sidenote:&lt;/strong&gt; I chose Idiom’s file, because I had some trouble finding any other &lt;em&gt;.xlz&lt;/em&gt; packages on the web (though I know that the format is rather popular). For the purpose of future posts, I will probably upload a minimal file of my own.&lt;/p&gt;
+
+&lt;h2 id=&quot;stage-1-unpacking&quot;&gt;Stage 1: Unpacking&lt;/h2&gt;
+
+&lt;p&gt;For this example, I use a translation package in the form of a zipped archive – an &lt;em&gt;.xlz&lt;/em&gt; file.&lt;/p&gt;
+
+&lt;p&gt;Fun fact: this format is used by the two clunkiest, most unpleasant CAT tools I have used in my life: Idiom WorldServer and Lionbridge’s TMS. For this reason, cracking this filetype is a way for me to confront the ghosts of the past :D&lt;/p&gt;
+
+&lt;p&gt;A little bit of overview: .xlz files are actually archive files. They contain an &lt;em&gt;.xlf&lt;/em&gt; file, which is based on XML and the one we directly translate; there can also be an &lt;em&gt;.skl&lt;/em&gt; (skeleton) file describing the original structure, and other supplementary files, such as glossaries (also XML-based, usually with the &lt;em&gt;.tbx&lt;/em&gt; extension).&lt;/p&gt;
+
+&lt;p class=&quot;info&quot;&gt;If you want a primer on archives and XML files, check out &lt;a href=&quot;/modern_translation_blog/intro/files/xml/2020/05/11/translation-formats-intro.html&quot;&gt;the previous post&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Now let’s get to the action! First, place the copy of the file in some separate directory. I personally use &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;C://Examples&lt;/code&gt; in this case.&lt;/p&gt;
+
+&lt;p&gt;We would like to extract the files from the zip archive. However, unless you have some specific software installed, our File Explorer does not recognize the &lt;em&gt;.xlz&lt;/em&gt; extension as an archive and does not give us the option directly.&lt;/p&gt;
+
+&lt;p&gt;We could use a zip-handling program here, such as 7Zip, to forcefully extract the files (I normally do, so my icon for the &lt;em&gt;.xlz&lt;/em&gt; filetype has a &lt;em&gt;7Z&lt;/em&gt; on it).&lt;br /&gt;
+Luckily, we don’t have to – default Windows tools can also help us, but we have to convince them that this mysterious file is actually a zip archive. How? By renaming it to &lt;em&gt;.zip&lt;/em&gt;!&lt;/p&gt;
+
+&lt;p&gt;To rename the file, either:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;right-click on its name and select the &lt;em&gt;Rename&lt;/em&gt; option from the popup menu, &lt;strong&gt;or&lt;/strong&gt;&lt;/li&gt;
+  &lt;li&gt;left-click the name and choose the &lt;em&gt;Rename&lt;/em&gt; option from the upper menu (under the &lt;em&gt;File&lt;/em&gt; tab).&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;I have marked both options below, using red boxes:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/modern_translation_blog/assets/blogpost2/file_rename.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;p class=&quot;info&quot;&gt;&lt;strong&gt;The fast way:&lt;/strong&gt;&lt;br /&gt;
+You can also left-click the filename and press &lt;em class=&quot;kbd&quot;&gt;F2&lt;/em&gt; to start renaming!&lt;br /&gt;
+Then, you can press &lt;strong&gt;any&lt;/strong&gt; arrow key (to deselect the name) and then the &lt;em class=&quot;kbd&quot;&gt;End&lt;/em&gt; key (to jump to the end, after the extension).&lt;/p&gt;
+
+&lt;p&gt;My personal trick here is that I don’t &lt;em&gt;replace&lt;/em&gt; the extension with &lt;em&gt;.zip&lt;/em&gt;, but rather &lt;strong&gt;add it&lt;/strong&gt; to the end, getting &lt;em&gt;.xlz.zip&lt;/em&gt;. It’s a bit faster for a keyboard-based workflow… And, if I have to take a break in the middle of my work, I don’t have to remember what the original extension was – it just stays there in the name :p&lt;/p&gt;
+
+&lt;p&gt;Type the &lt;em&gt;.zip&lt;/em&gt; extension and press &lt;em class=&quot;kbd&quot;&gt;Enter&lt;/em&gt; to confirm. A warning prompt appears:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/modern_translation_blog/assets/blogpost2/file_rename_warning.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;It sounds scary, but don’t worry! Like I mentioned in the first blog post, changing the extension does not change the file contents themselves. Click &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Yes&lt;/code&gt; or press &lt;em class=&quot;kbd&quot;&gt;Enter&lt;/em&gt; again.&lt;br /&gt;
+After renaming, the file icon should change to that of a zip archive.&lt;/p&gt;
+
+&lt;p&gt;And it’s not the only thing that’s changed! If you double-click on the zip file, you will see the files inside as if it were a normal folder. The only indication is the file path, which ends with &lt;em&gt;.zip&lt;/em&gt;.&lt;br /&gt;
+Also take a look at the top menu. A new tab, &lt;em&gt;Compressed Folder Tools&lt;/em&gt;, has appeared! To extract the files, do the following steps:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Left-click the &lt;em&gt;.zip&lt;/em&gt; file (if you are not “inside” it);&lt;/li&gt;
+  &lt;li&gt;click the &lt;em&gt;Compressed Folder Tools&lt;/em&gt; tab;&lt;/li&gt;
+  &lt;li&gt;and then the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Extract all&lt;/code&gt; option on the right-hand side.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;img src=&quot;/modern_translation_blog/assets/blogpost2/zip_extraction_steps.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;A dialog box will appear, asking us about the folder we want to extract the files to.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/modern_translation_blog/assets/blogpost2/file_extraction_popup.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;By default, the folder will have the same name as the zip archive, just without the &lt;em&gt;.zip&lt;/em&gt; extension. In my case, since I had the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;idiom_tutorial_copy.xlz.zip&lt;/code&gt; file in &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;C://Examples&lt;/code&gt;, the path offered to me by default is &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;C://Examples/idiom_tutorial_copy.xlz&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Fine by me, let’s use this path! Click &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Yes&lt;/code&gt; or press &lt;em class=&quot;kbd&quot;&gt;Enter&lt;/em&gt;. We now have our original zip archive and a folder with its contents, right next to it:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/modern_translation_blog/assets/blogpost2/after_extraction.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;(Interestingly, the folder has the &lt;em&gt;.xlz&lt;/em&gt; extension, but the icon of a folder… and it acts like one as well! This is because the &lt;em&gt;file vs folder&lt;/em&gt; distinction is contained in the metadata, and not influenced by any extensions).&lt;/p&gt;
+
+&lt;p&gt;If your only goal was to get some files out of the package, then you can just copy them out and finish right here :)&lt;/p&gt;
+
+&lt;h2 id=&quot;stage-2-modifying&quot;&gt;Stage 2: Modifying&lt;/h2&gt;
+
+&lt;p&gt;After the archive is unpacked, we have a bunch of XML files. And these are perfectly editable.&lt;/p&gt;
+
+&lt;p&gt;When browsing popular discussion boards for translators, I’ve seen many different cases of people editing XML directly, such as:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;removing the &lt;em&gt;machine-translated&lt;/em&gt; tag from Trados’ &lt;em&gt;.sdlxliff&lt;/em&gt; files;&lt;/li&gt;
+  &lt;li&gt;changing the languages codes within a translation memory file if the current ones are not recognized by the CAT tool (e.g. &lt;em&gt;EN&lt;/em&gt; to &lt;em&gt;EN-GB&lt;/em&gt;);&lt;/li&gt;
+  &lt;li&gt;anonymizing the file (removing personal data).&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;All the use-cases seem interesting, but perhaps the last one is the one we could all benefit from. Therefore, I will make it the focus of my example.&lt;/p&gt;
+
+&lt;p&gt;The file I want to edit is &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;eGate Project for DWB Tutorial_tasks.xlf&lt;/code&gt;, because it contains the actual source-translation pairs. This is where translators’ personal data can be stored.&lt;/p&gt;
+
+&lt;p&gt;Browsing the file with Notepad would be a pain, since it shows its contents as a single, huge, black-and-white block of text.&lt;br /&gt;
+A better text editor would be great here… this is why I recommend Notepad++ for Windows users. But you have to download it from the Internet. Isn’t there something included on all PCs, which would allow us to view XML in a pleasant way?&lt;/p&gt;
+
+&lt;p&gt;Did I mention &lt;em&gt;the Internet&lt;/em&gt;? Actually, almost all PCs have a tool whose job is to constantly parse HTML files, which are very similar to XML. Yep, these are &lt;strong&gt;our web browsers&lt;/strong&gt;!&lt;/p&gt;
+
+&lt;p&gt;We can open the &lt;em&gt;.xlf&lt;/em&gt; file with the browser (e.g by right-clicking the file, then selecting &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Open with&lt;/code&gt; and choosing a browser, Firefox in my case). We will see its structure in all its glory, with indendation and highlights!&lt;/p&gt;
+
+&lt;p&gt;Browsers have one weakness though – although they are good at &lt;strong&gt;displaying&lt;/strong&gt; XML, they are by default not suitable for &lt;strong&gt;editing&lt;/strong&gt; it. You could of course open the developer tools or download some extension… seems fun, but this is out of my league, and I also want to stick to the basics ;)&lt;/p&gt;
+
+&lt;p&gt;Instead, let’s use both tools together, by using the browser for viewing and the Notepad for replacing text! Here, I have put them both side by side:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/modern_translation_blog/assets/blogpost2/notepad_browser_compare.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;By your powers combined…&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;While skimming the document in Firefox, I notice that some of the tags have attributes related to a company (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;company-name=&quot;Idiom&quot;&lt;/code&gt;) and to a translator (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;contact-name=&quot;Tom Translator&quot;&lt;/code&gt;). Let’s say that we don’t want them in the file.&lt;/p&gt;
+
+&lt;p&gt;So we click on the Notepad window, press &lt;em class=&quot;kbd&quot;&gt;Ctrl&lt;/em&gt;+&lt;em class=&quot;kbd&quot;&gt;H&lt;/em&gt; to get the replacement popup. We put:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Tom Translator&lt;/code&gt; in the &lt;em&gt;Find&lt;/em&gt; field;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Anonymous&lt;/code&gt; (or any other name) in the &lt;em&gt;Replace&lt;/em&gt; field.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/modern_translation_blog/assets/blogpost2/replace_window.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Then we click &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Replace All&lt;/code&gt;. All mentions of the translator should disappear. After we are done, we can save (&lt;em class=&quot;kbd&quot;&gt;Ctrl&lt;/em&gt;+&lt;em class=&quot;kbd&quot;&gt;S&lt;/em&gt;) the file.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Warning:&lt;/strong&gt;&lt;br /&gt;
+The replacements were safe in this case, but normally it’s better not to treat XML like plain text, or at least to be careful. Although XML files can be readable, they are more structured and reckless edits (like replacing the “ character, which has special meaning) could corrupt the file.&lt;/p&gt;
+
+&lt;h2 id=&quot;stage-3-repackaging&quot;&gt;Stage 3: Repackaging&lt;/h2&gt;
+
+&lt;p&gt;After we are done with changing the files, we may want to put them back into the translation package. In this case, just make sure they are all in the same folder and then:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;select them (you can press &lt;em class=&quot;kbd&quot;&gt;Ctrl&lt;/em&gt;+&lt;em class=&quot;kbd&quot;&gt;A&lt;/em&gt; in File Explorer);&lt;/li&gt;
+  &lt;li&gt;select the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Share&lt;/code&gt; tab from the upper menu;&lt;/li&gt;
+  &lt;li&gt;click &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Zip&lt;/code&gt;.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;img src=&quot;/modern_translation_blog/assets/blogpost2/zipping_back_steps.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;After you zip the files, the name of the resulting zip archive will be highlighted automatically, allowing you to easily change it. One caveat though – by default, the zipped folder has the same name as the &lt;strong&gt;first of the files&lt;/strong&gt;:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/modern_translation_blog/assets/blogpost2/initial_rename.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;…And we want it to have the same name as &lt;strong&gt;the folder which contained the files&lt;/strong&gt;. Luckily, if we added the &lt;em&gt;.zip&lt;/em&gt; extension at the very end, we can get the right name name easily.&lt;/p&gt;
+
+&lt;p&gt;Look at the bar above, where you have the full path to the file. Then left-click between the current folder name and the arrow icon (zone marked in red):&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/modern_translation_blog/assets/blogpost2/adr_bar1.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The path will be selected in text form:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/modern_translation_blog/assets/blogpost2/adr_bar2.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;You can now use your mouse/keyboard to select the last part (in my case, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;idiom_tutorial_copy.xlz&lt;/code&gt;), copy it and insert as the name of the zip file.&lt;/p&gt;
+
+&lt;p class=&quot;info&quot;&gt;&lt;strong&gt;The fast way&lt;/strong&gt;:&lt;br /&gt;
+After selecting, copy with &lt;em class=&quot;kbd&quot;&gt;Ctrl&lt;/em&gt;+&lt;em class=&quot;kbd&quot;&gt;C&lt;/em&gt;. Then left-click on the zipped folder, press &lt;em class=&quot;kbd&quot;&gt;F2&lt;/em&gt; to enter the rename mode, &lt;em class=&quot;kbd&quot;&gt;Ctrl&lt;/em&gt;+&lt;em class=&quot;kbd&quot;&gt;A&lt;/em&gt; to select all text, &lt;em class=&quot;kbd&quot;&gt;Ctrl&lt;/em&gt;+&lt;em class=&quot;kbd&quot;&gt;V&lt;/em&gt; to replace it with the copied name. Then confirm with two &lt;em class=&quot;kbd&quot;&gt;Enter&lt;/em&gt;s.&lt;/p&gt;
+
+&lt;p&gt;Excellent, now we have the modified files inside the zipped file, named the same way as the original package!&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/modern_translation_blog/assets/blogpost2/final_look.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;We can copy this package and either put it into an actual CAT tool for further processing or send it to our client in exchange for $$$ if our modifications were only some finishing touches :)&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Warning:&lt;/strong&gt;&lt;br /&gt;
+Instead of selecting the files and zipping them, you might feel tempted to zip the whole folder, so that it gets the name you want right away. &lt;strong&gt;DON’T&lt;/strong&gt;! If you do this, your package will become one level deeper (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;zip archive &amp;gt; folder &amp;gt; files&lt;/code&gt; instead of the original &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;zip archive &amp;gt; files&lt;/code&gt;) and CAT tools might not be able to open it.&lt;/p&gt;
+
+&lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;I have discussed in detail a rather popular workflow which allows you to get some files out of translation packages and modify them before they are loaded into a CAT tool… or to bypass the CAT tool altogether.&lt;/p&gt;
+
+&lt;p&gt;The main advantage of this workflow is that it does not require any special software, you can simply use the applications already installed by default on most Windows PCs (and probably on other systems as well – I can only speak for Linux Mint here!).&lt;/p&gt;
+
+&lt;p&gt;Its disadvantage is that it requires some mouse-clicking, typing and opening programs every time you want to work with a translation package. For this reason, it’s not suited for tasks where you have to modify multiple packages. Sure, you can learn keyboard shortcuts, train your muscle memory etc., but you will eventually hit a wall.&lt;/p&gt;
+
+&lt;p&gt;However, with a little bit of scripting, we can easily break this wall down and handle any number of zipped packages! This is what the next post in this series will be about.&lt;/p&gt;
+
+&lt;p&gt;Until then, have fun handling your packages in creative ways! :)&lt;/p&gt;</content><author><name></name></author><summary type="html">This is a series of blog posts on file formats used by CAT (Computer-assisted translation) programs for storing translation data. Their aim is to share some knowledge which should allow us to tame our CAT tools better. Or to become independent from their whims.</summary></entry><entry><title type="html">File formats in CAT tools 1 - a gentle introduction</title><link href="http://localhost:4000/modern_translation_blog/intro/files/xml/2020/05/11/translation-formats-intro.html" rel="alternate" type="text/html" title="File formats in CAT tools 1 - a gentle introduction" /><published>2020-05-11T13:50:25+02:00</published><updated>2020-05-11T13:50:25+02:00</updated><id>http://localhost:4000/modern_translation_blog/intro/files/xml/2020/05/11/translation-formats-intro</id><content type="html" xml:base="http://localhost:4000/modern_translation_blog/intro/files/xml/2020/05/11/translation-formats-intro.html">&lt;p&gt;&lt;em&gt;This is a series of blog posts on file formats used by CAT (Computer-assisted translation) programs for storing translation data. Their aim is to share some knowledge which should allow us to tame our CAT tools better. Or to become independent from their whims.&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;This post discusses some basic facts related to XML and archive files. If you want to jump straight to editing them without a CAT tool, see &lt;a href=&quot;/modern_translation_blog/jekyll/update/2020/08/16/translation-formats-practice.html&quot;&gt;Part 2&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;common-formats-used-in-translation&quot;&gt;Common formats used in translation&lt;/h2&gt;
 
@@ -8,7 +218,8 @@
 
 &lt;p&gt;Luckily, that is not the case. Most of the time, we can access and modify the content of these files. Even without using any CAT tools. In this post, I will try to untangle some myths related to them.&lt;/p&gt;
 
-&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; I will only focus on intermediate formats used directly by CAT tools. File formats we can import &lt;em&gt;into&lt;/em&gt; our CATs (such as &lt;em&gt;.docx&lt;/em&gt; or &lt;em&gt;.pdf&lt;/em&gt;) will only be breifly mentioned. They have their own quirks and I will discuss them in separate posts.&lt;/p&gt;
+&lt;p class=&quot;info&quot;&gt;&lt;strong&gt;Note:&lt;/strong&gt;&lt;br /&gt;
+I will only focus on intermediate formats used directly by CAT tools. File formats we can import &lt;em&gt;into&lt;/em&gt; our CATs (such as &lt;em&gt;.docx&lt;/em&gt; or &lt;em&gt;.pdf&lt;/em&gt;) will only be briefly mentioned. They have their own quirks and I will discuss them in separate posts.&lt;/p&gt;
 
 &lt;p&gt;Generally, we can divide most of file formats used by translation software into two categories: &lt;strong&gt;XML files&lt;/strong&gt; and &lt;strong&gt;archives&lt;/strong&gt;. The table below contains a summary:&lt;/p&gt;
 
@@ -52,17 +263,36 @@
 
 &lt;p&gt;Many things in the world were built atop some tailored XML 😀 It has also become the most popular intermediate format for translation files.&lt;/p&gt;
 
-&lt;p&gt;As translators, we might be using a few kinds of XML-based formats or their derivatives: &lt;em&gt;.xliff&lt;/em&gt; (for storing source-target pairs), &lt;em&gt;.tmx&lt;/em&gt; (for translation memories) or &lt;em&gt;.tbx&lt;/em&gt; (for glossaries).&lt;/p&gt;
+&lt;p&gt;As translators, we might be using a few kinds of XML-based formats or their derivatives: &lt;em&gt;.xliff&lt;/em&gt; (for storing source-target pairs), &lt;em&gt;.tmx&lt;/em&gt; (for translation memories) or &lt;em&gt;.tbx&lt;/em&gt; (for glossaries).&lt;br /&gt;
+Custom formats, &lt;em&gt;.mqxliff&lt;/em&gt; from MemoQ and &lt;em&gt;.sdlxliff&lt;/em&gt; from Trados, are based on &lt;em&gt;.xliff&lt;/em&gt; as well.&lt;/p&gt;
 
-&lt;p&gt;Here is an example of an XLIFF file structure (&lt;em&gt;.mqxliff&lt;/em&gt; from MemoQ and &lt;em&gt;.sdlxliff&lt;/em&gt; from Trados are based on it):&lt;/p&gt;
+&lt;p&gt;Here is an example of XLIFF file content:&lt;/p&gt;
 
-&lt;div class=&quot;language-xml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;xliff&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;xmlns=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;urn:oasis:names:tc:xliff:document:2.0&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;version=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;2.0&quot;&lt;/span&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-xml&quot; data-lang=&quot;xml&quot;&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;xliff&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;xmlns=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;urn:oasis:names:tc:xliff:document:2.0&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;version=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;2.0&quot;&lt;/span&gt;
  &lt;span class=&quot;na&quot;&gt;srcLang=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;en-US&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;trgLang=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;ja-JP&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
 
  &lt;span class=&quot;nt&quot;&gt;&amp;lt;file&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;f1&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;original=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Graphic Example.psd&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
   &lt;span class=&quot;nt&quot;&gt;&amp;lt;skeleton&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;href=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Graphic Example.psd.skl&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
 
-  &lt;span class=&quot;c&quot;&gt;&amp;lt;!--The first translation unit, containing source and target text...--&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;c&quot;&gt;&amp;lt;!--The 1st translation unit, containing source and target.--&amp;gt;&lt;/span&gt;
   &lt;span class=&quot;nt&quot;&gt;&amp;lt;unit&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;1&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
    &lt;span class=&quot;nt&quot;&gt;&amp;lt;segment&amp;gt;&lt;/span&gt;
     &lt;span class=&quot;nt&quot;&gt;&amp;lt;source&amp;gt;&lt;/span&gt;XLIFF Data Manager&lt;span class=&quot;nt&quot;&gt;&amp;lt;/source&amp;gt;&lt;/span&gt;
@@ -74,7 +304,8 @@
 
  &lt;span class=&quot;nt&quot;&gt;&amp;lt;/file&amp;gt;&lt;/span&gt;
 &lt;span class=&quot;nt&quot;&gt;&amp;lt;/xliff&amp;gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
 &lt;p&gt;&lt;em&gt;(Example adopted from &lt;a href=&quot;https://en.wikipedia.org/wiki/XLIFF&quot;&gt;the Wikipedia entry on XLIFF&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
 
 &lt;p&gt; &lt;/p&gt;
@@ -91,7 +322,7 @@
   &lt;/li&gt;
   &lt;li&gt;Apart from the obligatory name, each element may contain &lt;strong&gt;attributes&lt;/strong&gt;, which have some specific &lt;strong&gt;values&lt;/strong&gt;.&lt;/li&gt;
   &lt;li&gt;
-    &lt;p&gt;The attributes may only be specified in the start tag. The end tag can &lt;em&gt;only&lt;/em&gt; contain the name.&lt;/p&gt;
+    &lt;p&gt;They may only be specified in the start tag. The end tag contains the name only.&lt;/p&gt;
 
     &lt;p&gt;In this case, the attributes of the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;file&lt;/code&gt; element (line 4) are &lt;em&gt;id&lt;/em&gt; and &lt;em&gt;original&lt;/em&gt;. The value of the &lt;em&gt;id&lt;/em&gt; attribute is &lt;em&gt;&quot;f1&quot;&lt;/em&gt;. The value of the &lt;em&gt;original&lt;/em&gt; attribute is &lt;em&gt;&quot;Graphic Example.psd&quot;&lt;/em&gt;.&lt;/p&gt;
   &lt;/li&gt;
@@ -103,14 +334,14 @@
   &lt;li&gt;Space between elements does not matter that much. The example was indented (&lt;em&gt;prettified&lt;/em&gt;) for clarity, but the tags could have also been put in one line, one right after the other.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;What is most interesting to us, as translators, are the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;source&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;target&lt;/code&gt; elements. They occur in different translation formats. The first type contains the original text, and the second one contains our translation.&lt;/p&gt;
+&lt;p&gt;What is most interesting to us, as translators, are the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;source&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;target&lt;/code&gt; elements. They occur in many different bi- or multilingual files. The first type contains the original text, and the second one contains the translation.&lt;/p&gt;
 
 &lt;p&gt;  
  &lt;/p&gt;
 
 &lt;h1 id=&quot;archives&quot;&gt;Archives&lt;/h1&gt;
 
-&lt;p&gt;Archives are basically compressed folders which can contain multiple files. They might have various extensions, but in many cases &lt;strong&gt;they are the popular .zip format under the hood&lt;/strong&gt;. Some files which, quite surprisingly, are actually archives:&lt;/p&gt;
+&lt;p&gt;Archives are basically compressed folders which can contain multiple files. They might have different extensions, but in many cases &lt;strong&gt;they are the popular .zip format under the hood&lt;/strong&gt;. Some files which, quite surprisingly, are actually archives:&lt;/p&gt;
 
 &lt;ul&gt;
   &lt;li&gt;popular formats used by Microsoft Word (&lt;em&gt;.docx&lt;/em&gt;), Excel (&lt;em&gt;.xlsx&lt;/em&gt;) and PowerPoint (&lt;em&gt;.pptx&lt;/em&gt;),&lt;/li&gt;
@@ -119,67 +350,67 @@
   &lt;li&gt;and, of course, translation packages (&lt;em&gt;.xlz&lt;/em&gt;, &lt;em&gt;.mqxlz&lt;/em&gt;, &lt;em&gt;.sdlppx&lt;/em&gt;…).&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;Unlike XML files, archives can’t simply be viewed in your text editor. They contain compressed streams of data, which the text editor would try to directly convert into characters. The result is gibberish:&lt;/p&gt;
+&lt;p&gt;Unlike XML files, archives can’t simply be viewed in your text editor. They contain compressed streams of data, which the text editor would try to directly convert into characters. This is what happens if you try to open an archive in Notepad:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/modern_translation_blog/assets/blogpost1/archive_mangled_in_notepad.jpg&quot; /&gt;
-&lt;em&gt;(This is what happens if you try to open an archive in Notepad)&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/modern_translation_blog/assets/blogpost1/archive_mangled_in_notepad.jpg&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;You can see that most of the text is mangled and unreadable. File names within the archive are the only legible thing. My archive contained a single file, &lt;em&gt;example_file.txt&lt;/em&gt;, and it is shown here, in the middle of line 2.&lt;/p&gt;
+&lt;p&gt;Most of the text is mangled and unreadable. The only readable text within the raw bytes are file names, such as the name of the single file I zipped in this case - &lt;em&gt;example_file.txt&lt;/em&gt;, from line 2.&lt;/p&gt;
 
-&lt;p&gt;Sometimes, when browsing files in Windows Explorer or other file explorers, you can click on a &lt;em&gt;.zip&lt;/em&gt; file and see its contents as if it were a normal folder. It is because &lt;strong&gt;your operating system simply hides the complexity from you and unpacks the archive behind the scenes&lt;/strong&gt; (both Linux Mint and Windows 10 do it, from my experience). If you tried to actually open and edit the files contained in the archive, you could encounter trouble, such as broken references between documents.&lt;/p&gt;
+&lt;p&gt;Sometimes, when browsing files in Windows Explorer or other file explorers, you can click on a &lt;em&gt;.zip&lt;/em&gt; file and see its contents as if it were a normal folder. This is because &lt;strong&gt;your operating system hides the complexity from you and unpacks the archive behind the scenes&lt;/strong&gt; (both Linux Mint and Windows 10 do it, from my experience).&lt;br /&gt;
+However, if you tried to open and edit the files without extracting them first, you could encounter trouble.&lt;/p&gt;
 
-&lt;p&gt;If you want to actually modify the files within an archive, you should decompress it first, work on the individual files, and then re-compress the bundle again. This is also what your CAT tools do behind the scenes every time they open a package - there is no magic here.&lt;/p&gt;
+&lt;p&gt;To demonstrate, I saved this blog post to my disk, choosing the &lt;em&gt;“Web Page, complete”&lt;/em&gt; option. As a result, I got:&lt;/p&gt;
 
-&lt;p&gt;In practice, archive files used by translators usually contain a bunch of XML files: bilingual files for translation, structure of the source file (or the file itself), translation memories, glossaries etc. They might also contain some other reference files.&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;a &lt;em&gt;(…).html&lt;/em&gt; file,&lt;/li&gt;
+  &lt;li&gt;a &lt;em&gt;(…)_files&lt;/em&gt; folder right next to it.&lt;/li&gt;
+&lt;/ul&gt;
 
-&lt;h1 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h1&gt;
+&lt;p&gt;Then I packed them both into a zip archive. I opened both the original website and the one inside the archive by clicking on the &lt;em&gt;.html&lt;/em&gt; files. They both opened in my browser. However, they looked different.&lt;br /&gt;
+Here is a side-by-side comparison:&lt;/p&gt;
 
-&lt;p&gt;Although the variety of file formats may seem daunting at first, we can see they they can actually be divided into a very small number of categories and are subject to a set of universal rules. Here are some rules of thumbs which can make it easier to navigate the landscape of files:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/modern_translation_blog/assets/blogpost1/zipfile_mangle_illustration.jpg&quot; /&gt;&lt;/p&gt;
 
-&lt;ol&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;Files are just blocks of bytes&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;When my browser opened the file locked inside the archive, the image was not loaded and the text looked different.&lt;/p&gt;
 
-    &lt;p&gt;In practice, this means that two exactly identical files, opened by the same reliable software, will &lt;strong&gt;always&lt;/strong&gt; appear exactly the same. Sure, editing a file manually might be more tedious and error-prone, but there is no magic in CAT tools which would force you to use them.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;Files of the same type can be processed in the same way&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;This is because the &lt;em&gt;.html&lt;/em&gt; file refers to some files from the folder next to it. &lt;strong&gt;Even though we see the contents of the archive in the file explorers, our browser cannot access them&lt;/strong&gt;. So it can’t e.g. load the stylesheets which dictate the look of the website. This is also why the text looks different - the browser cannot access formatting information, so it uses the default font.&lt;/p&gt;
 
-    &lt;p&gt;&lt;em&gt;If it walks like a duck and it quacks like a duck, then it must be a duck&lt;/em&gt;.&lt;br /&gt;
-The data from all valid XML files can be extracted with an XML parser. Sure, the tag names and hierarchy might be different, but the general way of processing these files is universal. In the same manner, all zip archives can be unpacked and repacked in the same way.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;File extensions can be just a hint&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;This example shows us that files inside an archive are not as accessible as outside of it. If you want to modify the files, you should decompress the archive, make your changes, and then re-compress the bundle again. This is also what your CAT tools do behind the scenes every time they open a package - there is no magic here.&lt;/p&gt;
 
-    &lt;p&gt;Some programs use their own file extensions to differentiate themselves, get some custom icons or treatment from the operating system etc. But if they are actually &lt;em&gt;.zip&lt;/em&gt; archives, then they can be extracted like &lt;em&gt;.zip&lt;/em&gt; archives. If they are valid XML, then they can be parsed as XML. Then point 2 applies.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;There are exceptions to all rules&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;In practice, archive files used by translators usually contain a bunch of XML files: bilingual files for translation, structure of the source file (or the file itself), translation memories, glossaries… They might also contain some other reference files.&lt;/p&gt;
 
-    &lt;p&gt;Notice how I write &lt;em&gt;reliable software&lt;/em&gt; or &lt;em&gt;valid XML&lt;/em&gt;? Although the rules are universal, it is always possible to encounter something which deviates from them or is simply buggy. Don’t let this discourage you from freely experimenting with file manipulation… but maybe don’t experiment right before a deadline ;) Having a plan B always helps.&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
+&lt;h2 id=&quot;some-rules-of-thumb-for-dealing-with-files&quot;&gt;Some rules of thumb for dealing with files&lt;/h2&gt;
 
-&lt;p&gt;I hope this clarifies things a bit and gives you some confidence. CAT tool formats really are more accessible than they seem. Let’s &lt;a href=&quot;/modern_translation_blog/jekyll/update/2020/05/11/translation-formats-practice.html&quot;&gt;apply our knowledge in real-life situations&lt;/a&gt;!&lt;/p&gt;
+&lt;p&gt;Although the variety of file formats may seem daunting at first, they actually belong to a rather small set of categories and are subject to some universal rules.&lt;br /&gt;
+Here are the ones which made it much easier for me to feel comfortable around files:&lt;/p&gt;
 
-&lt;h1 id=&quot;other-resources&quot;&gt;Other resources&lt;/h1&gt;
+&lt;p&gt;&lt;strong&gt;1. Files are just blocks of bytes&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;In practice, this means that two exactly identical files, opened by the same reliable software, will &lt;strong&gt;always&lt;/strong&gt; appear exactly the same. In theory, you could write any file by hand. Sure, manual editing might be tedious and error-prone, but there is no magic in CAT tools which would force you to use them.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;2. Files of the same type can be processed in the same way&lt;/strong&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;If it walks like a duck and it quacks like a duck, then it must be a duck.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;There are many file formats, but the number of actual standards is much lower - many files have a common stem. For this reason, all valid XML files can be parsed with an XML parser and all ZIP archives can be unzipped. Can’t find any search results for some obscure .xyz format? Solution: recognize that .xyz is actually XML, use proven tools to parse the file and then adapt them to your use-case.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;3. File extensions are just a hint&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;If you manually change the extension of a file, you might see a warning pop up (on Windows) and the file icon change. This might make you think that the file was somehow converted. However, it wasn’t. The name of the file, including the extension, is &lt;strong&gt;separate from its content&lt;/strong&gt;.&lt;br /&gt;
+Some programs use custom file extensions to get distinct icons and treatment. But if their content is e.g. valid XML, then they can be opened perfectly fine as XML. Then point 2 applies.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;4. There are exceptions to all rules&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Notice how I write &lt;em&gt;reliable software&lt;/em&gt; or &lt;em&gt;valid XML&lt;/em&gt;? Although the rules are universal, it’s always possible to encounter something atypical or plain buggy. Don’t let this discourage you from experimenting with file manipulation… but maybe don’t do it right before a deadline! 😀 Having a plan B always helps.&lt;/p&gt;
+
+&lt;p&gt;I hope this clarifies things a bit and gives you some confidence. CAT tool formats really are more accessible than they seem. Let’s &lt;a href=&quot;/modern_translation_blog/jekyll/update/2020/08/16/translation-formats-practice.html&quot;&gt;apply our knowledge in real-life situations&lt;/a&gt;!&lt;/p&gt;
+
+&lt;h2 id=&quot;other-resources&quot;&gt;Other resources&lt;/h2&gt;
 
 &lt;ul&gt;
   &lt;li&gt;&lt;a href=&quot;https://www.w3schools.com/xml/&quot;&gt;XML tutorial from W3C&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://www.zaac.de/pdf/2015_TLC_Warsaw_Zerfass_DataTransfer_with_tmx_tbx_and_xliff.pdf&quot;&gt;A presentation by Angelika Zerfass discussing &lt;em&gt;.tmx&lt;/em&gt;, &lt;em&gt;.tbx&lt;/em&gt; and &lt;em&gt;.xliff&lt;/em&gt;&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/List_of_archive_formats#Comparison&quot;&gt;Wikipedia’s comparison of various archive formats&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name></name></author><summary type="html">This is a series of blog posts on file formats used by CAT (Computer-assisted translation) programs for storing translation data. Their aim is to share some knowledge which should allow us to tame our CAT tools better. Or to become independent from their whims.</summary></entry><entry><title type="html">File formats in CAT tools 2 - direct editing</title><link href="http://localhost:4000/modern_translation_blog/jekyll/update/2020/05/11/translation-formats-practice.html" rel="alternate" type="text/html" title="File formats in CAT tools 2 - direct editing" /><published>2020-05-11T13:50:25+02:00</published><updated>2020-05-11T13:50:25+02:00</updated><id>http://localhost:4000/modern_translation_blog/jekyll/update/2020/05/11/translation-formats-practice</id><content type="html" xml:base="http://localhost:4000/modern_translation_blog/jekyll/update/2020/05/11/translation-formats-practice.html">&lt;p&gt;&lt;strong&gt;Warning:&lt;/strong&gt; Blog post under construction, still need to add content.&lt;/p&gt;
-
-&lt;p&gt;&lt;em&gt;This is a series of blog posts on file formats used by CAT (Computer-assisted translation) programs for storing translation data. Their aim is to share some knowledge which should allow us to tame our CAT tools better. Or to become independent from their whims.&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;em&gt;This post discusses ways of editing file types often used by translators - XML files and archives - without actually using a CAT tool. If you want to learn about these files first see &lt;a href=&quot;/modern_translation_blog/jekyll/update/2020/05/11/translation-formats-intro.html&quot;&gt;Part 1&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;prerequisites&quot;&gt;Prerequisites&lt;/h2&gt;
-
-&lt;p&gt;In order to tinker with translation files, you will need a few programs:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;A &lt;strong&gt;text editor&lt;/strong&gt; for opening files (on Windows, you can use the default Notepad or the free &lt;a href=&quot;https://notepad-plus-plus.org/&quot;&gt;Notepad++&lt;/a&gt;)&lt;/li&gt;
-  &lt;li&gt;A program for &lt;strong&gt;opening zip archives&lt;/strong&gt; (on Windows, you can use the free &lt;a href=&quot;https://www.7-zip.org/download.html&quot;&gt;7Zip&lt;/a&gt;)&lt;/li&gt;
-  &lt;li&gt;A &lt;strong&gt;CAT tool&lt;/strong&gt; of your choice (e.g. the free &lt;a href=&quot;https://omegat.org/download&quot;&gt;OmegaT&lt;/a&gt;)&lt;/li&gt;
-&lt;/ul&gt;</content><author><name></name></author><summary type="html">Warning: Blog post under construction, still need to add content.</summary></entry></feed>
+  &lt;li&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/List_of_archive_formats#Comparison&quot;&gt;Wikipedia’s summary of various archive formats&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content><author><name></name></author><summary type="html">This is a series of blog posts on file formats used by CAT (Computer-assisted translation) programs for storing translation data. Their aim is to share some knowledge which should allow us to tame our CAT tools better. Or to become independent from their whims.</summary></entry></feed>

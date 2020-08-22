@@ -70,6 +70,10 @@ table td { border: 1px solid #e8e8e8; }
 
 .kbd { display: inline-block; margin: 0 .1em; padding: 0 .5em; color: black; background-color: #f0f0f0; border: 1px solid #aaaaaa; border-radius: 3px; box-shadow: 0 1px 1px lightgray; white-space: nowrap; }
 
+.pshell { color: #d9ecfd; background-color: #002456; }
+
+.win { background-color: #eeeeee; }
+
 .pyprint { color: blue; padding: .5em; background_color: white; box-shadow: 0 1px 10px lightgray; font-family: "Lucida Console", Monaco, monospace; }
 
 /** Site header */
@@ -99,7 +103,7 @@ table td { border: 1px solid #e8e8e8; }
 
 .contact-list, .social-media-list { list-style: none; margin-left: 0; }
 
-.footer-col-wrapper { font-size: 15px; color: #828282; margin-left: -15px; }
+.footer-col-wrapper { font-size: 15px; color: #828282; }
 
 .footer-col { float: left; margin-bottom: 15px; padding-left: 15px; }
 

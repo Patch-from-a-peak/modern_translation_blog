@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Getting started with Python | Modern Translation blog</title>
+<meta name="generator" content="Jekyll v3.8.5" />
+<meta property="og:title" content="Getting started with Python" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Introduction" />
+<meta property="og:description" content="Introduction" />
+<link rel="canonical" href="http://localhost:4000/modern_translation_blog/jekyll/update/2020/08/22/python-commandline-start.html" />
+<meta property="og:url" content="http://localhost:4000/modern_translation_blog/jekyll/update/2020/08/22/python-commandline-start.html" />
+<meta property="og:site_name" content="Modern Translation blog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-08-22T12:01:25+02:00" />
+<script type="application/ld+json">
+{"@type":"BlogPosting","headline":"Getting started with Python","dateModified":"2020-08-22T12:01:25+02:00","datePublished":"2020-08-22T12:01:25+02:00","url":"http://localhost:4000/modern_translation_blog/jekyll/update/2020/08/22/python-commandline-start.html","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/modern_translation_blog/jekyll/update/2020/08/22/python-commandline-start.html"},"description":"Introduction","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="shortcut icon" type="image/png" href="/modern_translation_blog/assets/mt_favicon.png">
+  <link rel="stylesheet" href="/modern_translation_blog/assets/main.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/modern_translation_blog/feed.xml" title="Modern Translation blog" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/modern_translation_blog/">Modern Translation blog</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/modern_translation_blog/about/">About</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Getting started with Python</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2020-08-22T12:01:25+02:00" itemprop="datePublished">Aug 22, 2020
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <h2 id="introduction">Introduction</h2>
+
+<p>Repetitive tasks are exhausting to us humans. To computers, they are a breeze. So why should we be the ones doing them? With a tiny bit of scripting, we can make them the job of our machines!</p>
+
+<p>Enter Python, a programming language (named after Monty Python, not a snake). Beginner-friendly, readable and incredibly versatile. It allows you to automate and augment your workflows, letting you focus on the interesting parts.</p>
+
+<p>In this post, I will show you how to install Python, use it – both from the default launcher and Windows’ PowerShell – and customize some settings, making it easily accessible.</p>
+
+<h1 id="prerequisites">Prerequisites</h1>
+
+<p>I assume:</p>
+
+<p><strong>1. You have control over your computer</strong>;<br />
+   Seems obvious… but computers facing the general public, such as those in libraries, might have restricted access. Some options – e.g. installing Python – might not be available.</p>
+
+<p><strong>2. Your operating system is Windows 10</strong>;<br />
+   The tutorial should also work on previous versions, but I can’t promise it does. Even if you have an older version, you can still try and give me some feedback if anything goes wrong.</p>
+
+<p><strong>3. You have Notepad, PowerShell and File Explorer</strong>.<br />
+   If 2. is true for you, than this should be as well, since Windows has all these programs installed by default. Of course, if you prefer other programs and feel familiar with them, you can use them instead.</p>
+
+<h2 id="the-basics">The basics</h2>
+
+<h1 id="1-installing-python">1. Installing Python</h1>
+
+<p>To get Python, visit <a href="www.python.org">its website</a>. It should automatically offer the Python version most suited for your operating system.</p>
+
+<p>After you download it, you should have a <code class="language-plaintext highlighter-rouge">python-&lt;x.y.z&gt;.exe</code> file, where <code class="language-plaintext highlighter-rouge">&lt;x.y.z&gt;</code> will be your version number. Click on it to launch the installer.</p>
+
+<p>Make sure the <code class="language-plaintext highlighter-rouge">tcl/tk and IDLE</code> option is selected on the first screen (IDLE is the editor we’re going to use).</p>
+
+<p><img src="/modern_translation_blog/assets/blogpost3_python_first_steps/pyinstall1.jpg" /></p>
+
+<p>When you reach the second screen, make sure <code class="language-plaintext highlighter-rouge">Add Python to environment variables</code> is selected. This option will allow you to call Python from any folder.</p>
+
+<p><img src="/modern_translation_blog/assets/blogpost3_python_first_steps/pyinstall2.jpg" /></p>
+
+<p>The rest is up to you, you can stick to the default options, although I <strong>really</strong> recommend choosing the <em>pip</em> option from the first screen as well.</p>
+
+<p class="info">If you have already installed Python without choosing the options I recommend, you can still click the <em>.exe</em> file again, select the <code class="language-plaintext highlighter-rouge">Modify...</code> option and choose them; no need to reinstall the whole thing.</p>
+
+<p>Python is a <em>programming language</em>, which means that it’s just a set of logical rules; it has no physical form of its own and has to be launched <strong>inside another program</strong>.</p>
+
+<p>The launcher installed by default is called IDLE. It’s simple but sweet. And specifically tailored to Python, so it <em>understands it</em> and can offer some helpful features (e.g. applying different text color to commands which have a special meaning in Python).</p>
+
+<p>Let’s try it out! You can open IDLE from the start menu, under the <em>Python</em> tab:</p>
+
+<p><img src="/modern_translation_blog/assets/blogpost3_python_first_steps/python_in_startmenu.jpg" /></p>
+
+<p>You will see Python’s <strong>interactive shell</strong>, a place where you can enter Python commands and see your results right away.</p>
+
+<p><img src="/modern_translation_blog/assets/blogpost3_python_first_steps/python_hello.jpg" /></p>
+
+<p>Type in (or copy and paste after the <code class="language-plaintext highlighter-rouge">&gt;&gt;&gt;</code>) the text below, then confirm by pressing <code class="language-plaintext kbd highlighter-rouge">Enter</code>.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="s">'Hello!'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>It will be displayed in blue and the <code class="language-plaintext highlighter-rouge">&gt;&gt;&gt;</code> prompt will jump to the next line:</p>
+
+<p><img src="/modern_translation_blog/assets/blogpost3_python_first_steps/python_hello2.jpg" /></p>
+
+<p>Meaning that your Python is working!</p>
+
+<h1 id="2-creating-your-first-script">2. Creating your first script</h1>
+
+<p>Python’s interactive mode is useful for poking around, but it doesn’t store any commands between sessions. You usually want to prepare some functions beforehand, save them somewhere on your disk and then load them when you need them.</p>
+
+<p>This is what <em>.py</em> files are used for. We will create and save our first Python script, using IDLE’s editor mode.</p>
+
+<p class="info">Python’s <em>.py</em> files are simple text files; if you wanted, you could create them in Notepad as well and save with the <em>.py</em> extension. We are only using IDLE’s editor for convenience.</p>
+
+<p>Without leaving IDLE, open the script editor (<code class="language-plaintext kbd highlighter-rouge">Ctrl</code>+<code class="language-plaintext kbd highlighter-rouge">N</code> or <code class="language-plaintext win highlighter-rouge">File &gt; New file</code> from the top left menu). You will see an empty window similar to Notepad. This is where you can write Python files.</p>
+
+<p>Let’s write something to test our script, like:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="s">'Hello from script!'</span><span class="p">)</span>
+</code></pre></div></div>
+<p><img src="/modern_translation_blog/assets/blogpost3_python_first_steps/hello_untitled.jpg" /></p>
+
+<p>Let’s run the script. Press <em class="kbd">F5</em>. A prompt will appear asking you to save the file first:</p>
+
+<p><img src="/modern_translation_blog/assets/blogpost3_python_first_steps/src_must_be_saved.jpg" /></p>
+
+<p>Choose OK to open the standard file saving window. I have created a new folder, <code class="language-plaintext highlighter-rouge">C:\MyScripts</code>, which I will also use as my future folder for Python scripts. If you want to follow the tutorial to the letter, do the same; you can also add any other name you want.</p>
+
+<p>In the bottom field, enter the name you want to give to your Python file and confirm (I used <code class="language-plaintext highlighter-rouge">myscript</code>). You don’t have to type in the <em>.py</em> extension, it will be added automatically.</p>
+
+<p>IDLE’s interactive mode will be launched and you should see your text, <code class="language-plaintext highlighter-rouge">Hello from script!</code>, printed in blue:</p>
+
+<p><img src="/modern_translation_blog/assets/blogpost3_python_first_steps/hello_from_script_result.jpg" /></p>
+
+<p>If it works, it means that you can now write helpful scripts and place them in any folders you want!</p>
+
+<p>The next step is to reach Python from anywhere, not just by opening its scripts. For this, we’ll use the default utility bundled with Windows – PowerShell.</p>
+
+<h1 id="3-python-in-powershell">3. Python in PowerShell</h1>
+
+<p>Simply put: PowerShell is a minimalistic (text-only, no graphical gimmicks) tool for launching other programs. You can – and usually will – launch it from your File Explorer. Open it from the top menu, after clicking the dark-blue <code class="language-plaintext win highlighter-rouge">File</code> tab:</p>
+
+<p><img src="/modern_translation_blog/assets/blogpost3_python_first_steps/powershell_open.jpg" /></p>
+
+<p class="info"><strong>Trick:</strong><br />
+When you use the File Explorer, you can also hold the <code class="language-plaintext kbd highlighter-rouge">Shift</code> button and right-click anywhere with the mouse; you will see the <code class="language-plaintext win highlighter-rouge">Open PowerShell here</code> option in the popup menu, which is normally hidden.</p>
+
+<p>Click the option to open PowerShell. It has this minimalistic look, like from all the mainstream hacker movies:</p>
+
+<p><img src="/modern_translation_blog/assets/blogpost3_python_first_steps/powershell_first_launch.jpg" /></p>
+
+<p>Look at the prompt:</p>
+<ul>
+  <li>The first two letters, <code class="language-plaintext highlighter-rouge">PS</code>, indicate that it’s PowerShell.</li>
+  <li>
+    <p>Then you have the currently active directory – the folder “you are currently in”. It’s <code class="language-plaintext highlighter-rouge">C:\Examples\Python_first_steps</code> in my case.</p>
+
+    <p>In PowerShell, <strong>active directory matters</strong>. Alot. In Python’s case, it usually matters when you <em>import</em> files, meaning that you load the code contained inside them. By default, you can only call your ad-hoc scripts from the same folder where you put them.</p>
+  </li>
+  <li>The last part is the <code class="language-plaintext highlighter-rouge">&gt;</code> sign and a blinking cursor after it. This is where you can type commands; there are many of them available and they don’t have to be related to Python at all!</li>
+</ul>
+
+<p>Let’s check if we can reach Python from anywhere. Type <code class="language-plaintext pshell highlighter-rouge">python</code> and confirm with <code class="language-plaintext kbd highlighter-rouge">Enter</code>. You should see the same familiar mode as in IDLE, but less colorful:</p>
+
+<p><img src="/modern_translation_blog/assets/blogpost3_python_first_steps/powershell_python.jpg" /></p>
+
+<p class="info"><strong>Travel analogy</strong>:<br />
+Imagine Python is a travelling artist. Python has great potential, but in order to create anything, he/she has to get some personal space first. IDLE and PowerShell are two of many places which can host our traveller and provide this space.<br />
+IDLE is like the house of Python’s distant relative. The host knows Python well and adjusts decorations to our artist’s preferences (<em>syntax highlighting</em>).<br />
+PowerShell is like a large hotel. It can accept many different guests, so Python has to check in before getting a room (hence we have to type <code class="language-plaintext pshell highlighter-rouge">python</code>). It also does not cater to Python’s specific tastes (<em>no highlighting</em>), but has some general useful facilities (like <em>history</em> and <em>autocompletion</em>, not discussed here).</p>
+
+<p>Let’s stop for a bit and imagine the potential. What if, in the future, we could just move to a folder with the files we need to translate, open PowerShell, type <code class="language-plaintext pshell highlighter-rouge">python do_my_job</code> and see all boring parts done before our eyes? Just enough to aid us without making us redundant of course ;)</p>
+
+<p>This future might not be that far, but we have to lay some more foundation and customize our settings a bit. Don’t close PowerShell yet!</p>
+
+<h2 id="customizations">Customizations</h2>
+
+<h1 id="4-locating-pythons-source-folder">4. Locating Python’s source folder</h1>
+
+<p>We will be playing around with some of Python’s settings now. To do it, we should get to its core folder, buried deep within the files. There are many ways to find it… but since we have Python open in PowerShell, we might as well use it to show us the path.</p>
+
+<p>First, with Python still active in PowerShell, type (or copy from here):</p>
+
+<p><code class="language-plaintext pshell highlighter-rouge">import sys</code></p>
+
+<p>Confirm by pressing <code class="language-plaintext kbd highlighter-rouge">Enter</code>. You should receive no visual feedback – apart from the console jumping to the next line – but trust me, all we needed has been loaded. Now type or copy:</p>
+
+<p><code class="language-plaintext pshell highlighter-rouge">for p in sys.path: print(p)</code></p>
+
+<p>Press <code class="language-plaintext kbd highlighter-rouge">Enter</code> <strong>twice</strong>. This is the result we should see (one of the paths highlighted by me; of course, your user name will also be different):</p>
+
+<p><img src="/modern_translation_blog/assets/blogpost3_python_first_steps/sys_path.jpg" /></p>
+
+<p class="info">If you want to know what’s happening: <code class="language-plaintext highlighter-rouge">sys.path</code> belongs to the <code class="language-plaintext highlighter-rouge">sys</code> module we’ve imported. It’s a list of paths where Python searches for its scripts. By using <code class="language-plaintext highlighter-rouge">for...</code>, we move through its elements one by one. <code class="language-plaintext highlighter-rouge">p</code> is just a temporary name given to each of these elements. And we use <code class="language-plaintext highlighter-rouge">print</code>, because we want each path in a form we can easily copy. If we hadn’t used it, we would e.g. have double slashes (<code class="language-plaintext highlighter-rouge">\\</code>) instead of single ones.</p>
+
+<p>Copy the path ending with <em>lib</em>, which I’ve highlighted in the picture above. This is where Python stores its files.</p>
+
+<p>Then open File Explorer and click on the right side of the address bar (marked in red):</p>
+
+<p><img src="/modern_translation_blog/assets/blogpost3_python_first_steps/file_selection_window.jpg" /></p>
+
+<p>This will select the whole path as text:</p>
+
+<p><img src="/modern_translation_blog/assets/blogpost3_python_first_steps/file_selection_window2.jpg" /></p>
+
+<p>Paste the <code class="language-plaintext highlighter-rouge">...\lib</code> path you’ve copied from PowerShell:</p>
+
+<p><img src="/modern_translation_blog/assets/blogpost3_python_first_steps/file_selection_window3.jpg" /></p>
+
+<p>…and confirm by pressing <code class="language-plaintext kbd highlighter-rouge">Enter</code>. You are now inside Python’s main folder. This is what you should see:</p>
+
+<p><img src="/modern_translation_blog/assets/blogpost3_python_first_steps/python_lib_dir.jpg" /></p>
+
+<p>I have marked two folders which are of interest to us. We will work on them during the next two steps, so don’t close this Explorer window yet. I’ll be referring to it as the <strong>Python folder window</strong>.</p>
+
+<h1 id="5-making-idle-open-py-files-by-default">5. Making IDLE open <em>.py</em> files by default</h1>
+
+<p>By default, <em>.py</em> files get <strong>launched</strong> when you double-click them. Not much happens – you catch a glimpse of a dark console window when the code inside gets executed, then it disappears.</p>
+
+<p>If you want to open a file for <strong>editing</strong>, you can right-click its name, select <code class="language-plaintext win highlighter-rouge">Edit with IDLE</code>, and then choose the option to the right:</p>
+
+<p><img src="/modern_translation_blog/assets/blogpost3_python_first_steps/open_with_idle_option.jpg" /></p>
+
+<p>But right-clicking and selecting is rather slow. If (when!) we get addicted to Python, we will be editing files often, so let’s make it as ergonomic as we can. Let’s make IDLE open the file in edit mode after a double left click.</p>
+
+<p>Right-click on any <em>.py</em> file, then select <code class="language-plaintext win highlighter-rouge">Open with</code>.<br />
+You will see a list of programs which could be used to open the file. Unfortunately, IDLE is not on it. Click <code class="language-plaintext win highlighter-rouge">More apps</code> and also <strong>the box next to the “Always use…” option</strong>.</p>
+
+<p><img src="/modern_translation_blog/assets/blogpost3_python_first_steps/open_with_menu.jpg" /></p>
+
+<p>IDLE’s still not there. Scroll down to the end of the list and click the <code class="language-plaintext win highlighter-rouge">Look for another app on this PC</code> option.</p>
+
+<p><img src="/modern_translation_blog/assets/blogpost3_python_first_steps/py_more_options.jpg" /></p>
+
+<p>A File Explorer window will appear, from which you can choose any file we want. I’ll call it <strong>IDLE selection window</strong> for now. Don’t close it, we’ll get back to it.</p>
+
+<p>Now we want the path to our IDLE, which is buried surprisingly deep in the files! To get it, open the <strong>Python folder window</strong> from before. There, copy the path from the upper bar (using the same steps as in the previous point).<br />
+Move back to the <strong>IDLE selection window</strong> and click on the right side of the filepath bar, like before. Paste the path you copied and confirm. You will move to Python’s main directory. Move to the <code class="language-plaintext highlighter-rouge">idlelib</code> folder, where IDLE is stored. There, you can select <code class="language-plaintext highlighter-rouge">idle.bat</code>:</p>
+
+<p><img src="/modern_translation_blog/assets/blogpost3_python_first_steps/file_selection_window4.jpg" /></p>
+
+<p>Confirm. The Python file you originally clicked should open in IDLE, ready for editing. Well done! From now on, you can open all <em>.py</em> files with a double left-click. Making quick changes to your scripts will be quick and smooth.</p>
+
+<p>Here, I’d like to give credit to <a href="https://stackoverflow.com/questions/24988880/set-python-idle-as-default-program-to-open-py-extensions">this great answer from StackOverflow</a>, which showed me where to look for IDLE!</p>
+
+<h1 id="6-creating-a-folder-for-your-python-scripts">6. Creating a folder for your Python scripts</h1>
+
+<p>Currently, you can create your own scripts and launch Python from anywhere…  but how about calling <strong>your own scripts from anywhere</strong>? Let’s create a separate folder for all the scripts we make ourselves. This way, we can easily launch them, organise them and move them between computers.</p>
+
+<p>To do this, we have to create a separate folder and “let Python know” that it should also look inside it whenever we try to import files.</p>
+
+<p>You can create this folder in any location. In my case, I used the <code class="language-plaintext highlighter-rouge">C:\\PyScripts</code> folder created in step 2. Inside it, I put a <code class="language-plaintext highlighter-rouge">myscript.py</code> file, which only contains <code class="language-plaintext highlighter-rouge">print('Hello from anywhere!')</code> and nothing else.</p>
+
+<p>Remember the <strong>Python folder window</strong> from before, where I’ve marked two subfolders? One of them is <code class="language-plaintext highlighter-rouge">site_packages</code>. It’s the place where Python looks for scripts to import. We can also put paths to our custom folders inside it!</p>
+
+<p>Open this <code class="language-plaintext highlighter-rouge">site_packages</code> folder and create a new text file by e.g. right-clicking and selecting <code class="language-plaintext win highlighter-rouge">New &gt; Text Document</code>. <strong>The file can have any name, but must end with the .pth extension</strong> (<a href="https://stackoverflow.com/questions/3402168/permanently-add-a-directory-to-pythonpath">source</a>).</p>
+
+<p>Then open the file with Notepad (right-click, <code class="language-plaintext win highlighter-rouge">Open with...</code>). Inside it, enter the path to the custom folder you’ve created.</p>
+
+<p><img src="/modern_translation_blog/assets/blogpost3_python_first_steps/myscripts_pth_file.jpg" /></p>
+
+<p>Let’s test it out! Using File Explorer, move to ANY location and open PowerShell. Inside it, type <code class="language-plaintext pshell highlighter-rouge">python</code> to enter the interactive mode. And then type <code class="language-plaintext pshell highlighter-rouge">import x</code>, putting the name of your file (without <em>.py</em>) instead of <code class="language-plaintext highlighter-rouge">x</code>. Confirm.</p>
+
+<p><img src="/modern_translation_blog/assets/blogpost3_python_first_steps/hello_anywhere.jpg" /></p>
+
+<p>Look at the first line – it shows that I’m calling PowerShell from the <code class="language-plaintext highlighter-rouge">D:\</code> location. And yet, when I import a Python script called <code class="language-plaintext highlighter-rouge">myscript.py</code> located somewhere else (in <code class="language-plaintext highlighter-rouge">C:\MyScripts</code>), it still works!</p>
+
+<p class="info">If you wanted, you could also avoid creating your own folder and simply put your scripts in <code class="language-plaintext highlighter-rouge">site_packages</code> – they would still be accessible from anywhere. But as you download more Python packages, it’s easy to forget which scripts are yours or, even worse, to accidentally overwrite them.</p>
+
+<h1 id="6b-pinning-your-script-folder-in-explorer">6b. Pinning your script folder in Explorer</h1>
+
+<p>If you want to go the extra mile (well, maybe more of a meter…), you can also add pin your Python folder to File Explorer’s sidebar. To do this, simply right click on it in File Explorer and select <code class="language-plaintext win highlighter-rouge">Pin to Quick access</code>.</p>
+
+<p>Now, as you move around the files in Explorer, it will always be visible to your left, one click away.</p>
+
+<p><img src="/modern_translation_blog/assets/blogpost3_python_first_steps/quickpin.jpg" /></p>
+
+<h1 id="7-python-from-everywhere-in-one-line">7. Python from everywhere, in one line</h1>
+
+<p>This is more of a demonstration than a customization. If you completed the previous step and importing works, you can open a new PowerShell window anywhere and type:</p>
+
+<p><code class="language-plaintext pshell highlighter-rouge">python -m myscript</code></p>
+
+<p>…replacing <code class="language-plaintext highlighter-rouge">myscript</code> with the name of the script you’ve imported before.</p>
+
+<p>This little <code class="language-plaintext highlighter-rouge">-m</code> is a so-called <strong>flag</strong> which indicates that we want to launch a specific script instead of Python in general.</p>
+
+<p>…And sure enough, when we confirm, it does print our “Hello from anywhere”. We can directly call all Python scripts from our custom folder this way. A single line is enough to reach Python from anywhere!</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>After this tutorial, you:</p>
+
+<ul>
+  <li>have a working version of Python on your computer;</li>
+  <li>can launch Python from any folder on your computer, using PowerShell;</li>
+  <li>can create and save Python scripts for further use;</li>
+  <li>have a folder where you can place all your Python scripts to make them accessible from anywhere.</li>
+</ul>
+
+<p>Here are some example workflows now available to you:</p>
+
+<ul>
+  <li>
+    <p>Creating a single-use script:</p>
+
+    <p>When you want a one-time “fire and forget” script to prepare a single set of files, you can quickly make a new one, refine it, launch it… And then leave it alone.</p>
+  </li>
+  <li>
+    <p>Using custom scripts regularly</p>
+
+    <p>Sometimes you find out that your jobs involve repeating steps and you come to the decision to “promote” some of your scripts to regular ones. In this case, you can just copy them to your custom folder and <code class="language-plaintext highlighter-rouge">import</code> their contents from anywhere, to use it in future situations.</p>
+  </li>
+  <li>
+    <p>Making changes to existing scripts</p>
+
+    <p>You can swiftly edit your scripts by double-clicking them and making changes in IDLE.</p>
+  </li>
+  <li>
+    <p>Migrating to a new computer</p>
+
+    <p>When you are moving to a different machine and want to keep your collection of Python scripts, you can just copy your custom folder, move it, and then, on your new machine, create a <em>.pth</em> file pointing to its path. With all scripts in one place, you don’t risk forgetting anything.</p>
+  </li>
+</ul>
+
+<p>Remember how I day-dreamt in point 3 about calling Python to do a large part of our jobs? Turns out we can’t solve everything by typing <code class="language-plaintext pshell highlighter-rouge">python do_my_job</code>… It’s actually <code class="language-plaintext pshell highlighter-rouge">python -m do_my_job</code> ;)</p>
+
+<p>In future posts, I will share some ideas for what this mythical <code class="language-plaintext highlighter-rouge">do_my_job</code> could be – I will review some example scripts and show when they could be useful. Stay tuned!</p>
+
+  </div><a class="u-url" href="/modern_translation_blog/jekyll/update/2020/08/22/python-commandline-start.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/modern_translation_blog/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Modern Translation blog</h2>
+
+    <div class="footer-col-wrapper">
+
+      <p class="site-description">A blog focusing on the technical aspects of translation, such as scripting and software.</p>
+      
+      <div class="footer-col footer-col-1">
+        
+        <ul class="contact-list">
+          <li class="p-name"></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

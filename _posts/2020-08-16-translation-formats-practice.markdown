@@ -108,7 +108,9 @@ If your only goal was to get some files out of the package, then you can just co
 
 ## Stage 2: Modifying
 
-After the archive is unpacked, we have a bunch of XML files. And these are perfectly editable.
+After the archive is unpacked, we have a bunch of XML files (*.xlf*, *.tbx* and plain *.xml*). And these are perfectly editable.
+
+<img src="{{ site.baseurl }}/assets/blogpost2/unpacking_results.jpg">
 
 When browsing popular discussion boards for translators, I've seen many different cases of people editing XML directly, such as:
 
